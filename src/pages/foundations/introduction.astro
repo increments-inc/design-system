@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Callout from '../../components/Callout.astro';
+
+/**
+ * Introduction — explains what this system is, who uses it, and how it's structured.
+ * First page a new team member should read.
+ */
+---
+
+<BaseLayout
+  title="Introduction"
+  description="What the Increments Inc. design system is, who it's for, and how to use it."
+>
+  <PageHeader
+    eyebrow="01 · Foundation"
+    title="Introduction"
+    italicWord="Introduction"
+    lede="The system that keeps every Increments Inc. surface — product, marketing, sales, partner collateral — looking like it came from the same company. Start here before touching any design or code."
+  />
+
+  <Section title="What this is">
+    <p>
+      The <strong>Increments Inc. Design System</strong> is the single source of truth for our visual
+      language. It defines the colors, typography, spacing, shadows, motion, voice, and components that
+      every product screen, landing page, email, flyer, and deck must follow.
+    </p>
+    <p>
+      It was distilled from real shipped work — the partner playbook, six partner-program flyers, and the
+      Founding 25 campaign — and codified into a reusable set of tokens, components, and rules you can
+      apply anywhere.
+    </p>
+  </Section>
+
+  <Section title="Who this is for">
+    <ul class="intro-audience">
+      <li><strong>Designers</strong> — use the tokens and components in Figma; never invent a new color, radius, or shadow without a mapping here.</li>
+      <li><strong>Engineers</strong> — import the CSS custom properties; reuse the Astro/React components; follow the usage rules.</li>
+      <li><strong>Content &amp; marketing</strong> — follow the voice conventions, the italic-accent rule in headlines, and the non-negotiable contact footer format.</li>
+      <li><strong>Founders &amp; leadership</strong> — approve new components against these principles; reject anything that breaks the system without cause.</li>
+    </ul>
+  </Section>
+
+  <Section title="How the system is structured">
+    <p>The system ships in three layers:</p>
+    <ol class="intro-layers">
+      <li>
+        <strong>Brand Foundations</strong> — the 12 pages you're in now. Color, type, space, elevation,
+        motion, logo, voice, accessibility, and tokens. Everything else inherits from here.
+      </li>
+      <li>
+        <strong>Components</strong> <span class="tag-soon">Coming</span> — buttons, inputs, tables, modals,
+        navigation, data display. Built on the foundations.
+      </li>
+      <li>
+        <strong>Patterns</strong> <span class="tag-soon">Coming</span> — forms, dashboards, auth flows,
+        onboarding, empty states. Composed from components.
+      </li>
+    </ol>
+  </Section>
+
+  <Section title="How to use this site">
+    <ul class="intro-howto">
+      <li><strong>Read foundations first.</strong> Skim all 12 pages before you design or build anything. They take less than an hour end-to-end.</li>
+      <li><strong>Copy from the examples.</strong> Every page has live previews and copy-paste code. Don't reinvent.</li>
+      <li><strong>Use tokens — never raw values.</strong> Never write <code>#C0FE71</code> in your stylesheet. Always <code>var(--color-brand-lime)</code>.</li>
+      <li><strong>Respect the Do / Don't rules.</strong> Each was earned through a real shipping mistake — they're not stylistic preference.</li>
+      <li><strong>Propose, don't invent.</strong> If a needed pattern isn't here, raise it — we'll add it properly so the next person doesn't re-invent.</li>
+    </ul>
+  </Section>
+
+  <Callout variant="note" title="The north star">
+    <p>
+      <em>"Looks like a premium SaaS product brochure, not an agency flyer."</em>
+    </p>
+    <p>
+      When in doubt, ask whether your work feels closer to a Stripe product page, a Linear release note,
+      or an Increments flyer. If it doesn't, go back to the tokens and the components and rebuild from
+      them.
+    </p>
+  </Callout>
+
+  <Section title="Version & ownership">
+    <p>
+      <strong>Version:</strong> v0.1 · Brand Foundations shipped 2026-04-21.<br />
+      <strong>Owner:</strong> <a href="mailto:ceo@incrementsinc.com">MSI Shamim, Founder &amp; CEO</a>.<br />
+      <strong>Contributions:</strong> open a discussion before opening a PR — breaking foundation tokens
+      ripples across every surface.
+    </p>
+  </Section>
+</BaseLayout>
+
+<style>
+  .intro-audience,
+  .intro-layers,
+  .intro-howto {
+    padding-left: 0;
+    list-style: none;
+    max-width: 70ch;
+  }
+
+  .intro-audience li,
+  .intro-howto li {
+    position: relative;
+    padding-left: 22px;
+    margin-top: var(--space-5);
+    line-height: 1.6;
+  }
+
+  .intro-audience li::before,
+  .intro-howto li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: var(--color-brand-lime);
+    border-radius: 2px;
+    box-shadow: var(--shadow-icon-tile);
+  }
+
+  .intro-layers {
+    counter-reset: layer;
+    list-style: none;
+  }
+
+  .intro-layers li {
+    counter-increment: layer;
+    position: relative;
+    padding-left: 44px;
+    margin-top: var(--space-7);
+    line-height: 1.6;
+  }
+
+  .intro-layers li::before {
+    content: counter(layer, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    font-size: 22px;
+    color: var(--color-brand-lime);
+  }
+
+  .tag-soon {
+    display: inline-block;
+    font-size: 9.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-mute);
+    border: 1px solid var(--color-border-soft);
+    padding: 2px 7px;
+    border-radius: var(--radius-pill);
+    margin-left: 6px;
+    vertical-align: 1px;
+  }
+</style>

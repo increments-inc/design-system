@@ -1,0 +1,104 @@
+---
+/**
+ * Top header — logo on the left, version pill on the right.
+ * Sticks to top, sits above sidebar (z-header).
+ */
+
+import Logo from './Logo.astro';
+---
+
+<header class="site-header">
+  <a href="/" class="site-header-brand" aria-label="Increments Inc. Design System home">
+    <Logo width={130} height={22} />
+    <span class="site-header-divider" aria-hidden="true">/</span>
+    <span class="site-header-label">Design System</span>
+  </a>
+
+  <div class="site-header-meta">
+    <span class="site-header-tag">
+      <span class="site-header-dot" aria-hidden="true"></span>
+      v0.1 · Brand Foundations
+    </span>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-header);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--layout-header);
+    padding: 0 var(--space-14);
+    background: rgba(9, 16, 12, 0.85);
+    backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .site-header-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-5);
+    color: var(--color-text-strong);
+    border: none;
+    text-decoration: none;
+  }
+
+  .site-header-brand:hover {
+    border: none;
+  }
+
+  .site-header-divider {
+    color: var(--color-text-faint);
+    font-family: var(--font-editorial);
+    font-size: 20px;
+    margin: 0 2px;
+  }
+
+  .site-header-label {
+    font-size: 13.5px;
+    font-weight: var(--type-weight-semi);
+    color: var(--color-text-body);
+    letter-spacing: -0.005em;
+  }
+
+  .site-header-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .site-header-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: 11.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand-ink-on-lime);
+    background: var(--color-brand-lime);
+    border-radius: var(--radius-pill);
+    padding: 6px 12px 6px 10px;
+  }
+
+  .site-header-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-brand-ink-on-lime);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @media (max-width: 640px) {
+    .site-header-label {
+      display: none;
+    }
+    .site-header-divider {
+      display: none;
+    }
+  }
+</style>

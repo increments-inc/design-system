@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import DoDont from '../../components/DoDont.astro';
+import Callout from '../../components/Callout.astro';
+---
+
+<BaseLayout
+  title="Motion"
+  description="One animation for the whole system. Restraint signals premium."
+>
+  <PageHeader
+    eyebrow="08 · Foundation"
+    title="Motion"
+    italicWord="Motion"
+    lede="The entire Increments marketing system uses exactly one animation. A two-second pulse on the status dot. Everything else stays still — and that stillness is a design choice, not an accident."
+  />
+
+  <Section title="The one animation" kicker="Status-tag pulse">
+    <p>
+      The only moving element in the system is the pulsing dot inside a "live / active" status pill.
+      It's used on deadline indicators like <em>"Founding 25 · 25 slots left"</em> or partner-program
+      status pills. It signals "this offer is live right now" — and nothing else uses it.
+    </p>
+
+    <div class="motion-demo">
+      <span class="motion-tag">
+        <span class="motion-dot"></span>
+        Founding 25 · 25 slots left
+      </span>
+      <span class="motion-tag">
+        <span class="motion-dot"></span>
+        Partner applications open
+      </span>
+      <span class="motion-tag motion-tag--plain">
+        Page 3 · 6
+      </span>
+    </div>
+
+    <pre><code>{`@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s ease-in-out infinite;
+}`}</code></pre>
+  </Section>
+
+  <Section title="Why just one" kicker="Restraint is the differentiator">
+    <Callout variant="note" title="Motion budget: low is the goal.">
+      <p>
+        Every extra animation costs attention. On premium surfaces — Stripe, Linear, Apple product pages —
+        motion is reserved for state changes that actually matter. We follow the same discipline.
+      </p>
+      <p>
+        If you're tempted to add a hover wiggle, a card flip, a scroll-triggered entrance — ask
+        whether it communicates meaning or just ornament. If it's ornament, cut it.
+      </p>
+    </Callout>
+  </Section>
+
+  <Section title="Motion tokens" kicker="For allowed transitions (hover, focus)">
+    <p>
+      When a transition <em>is</em> warranted — a sidebar link color change, a button hover, a focus
+      ring appearing — use these durations and the shared easing curve.
+    </p>
+
+    <div class="motion-tokens">
+      <article class="motion-token">
+        <code class="motion-token-name">--motion-fast</code>
+        <span class="motion-token-value">120ms</span>
+        <p class="motion-token-use">Immediate hover feedback, focus appearance.</p>
+      </article>
+
+      <article class="motion-token">
+        <code class="motion-token-name">--motion-default</code>
+        <span class="motion-token-value">200ms</span>
+        <p class="motion-token-use">Standard color/background transitions.</p>
+      </article>
+
+      <article class="motion-token">
+        <code class="motion-token-name">--motion-slow</code>
+        <span class="motion-token-value">320ms</span>
+        <p class="motion-token-use">Sidebar reveal, modal open, significant state change.</p>
+      </article>
+
+      <article class="motion-token">
+        <code class="motion-token-name">--motion-ease</code>
+        <span class="motion-token-value">cubic-bezier(0.2, 0.8, 0.2, 1)</span>
+        <p class="motion-token-use">Shared easing for all transitions — gentle out, crisp in.</p>
+      </article>
+    </div>
+  </Section>
+
+  <Section title="Reduced motion" kicker="prefers-reduced-motion">
+    <p>
+      The system respects <code>prefers-reduced-motion: reduce</code> globally. When users opt out of
+      motion, all transitions and animations collapse to <code>0.01ms</code>, including the status-dot
+      pulse. This is implemented in <code>src/styles/global.css</code> and inherits across every page.
+    </p>
+
+    <pre><code>{`@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}`}</code></pre>
+  </Section>
+
+  <Section title="Usage rules">
+    <DoDont
+      dos={[
+        'Reserve the pulse animation for "live / active" status indicators only.',
+        'Use --motion-default (200ms) for standard hover/focus transitions.',
+        'Use the shared --motion-ease curve for every transition.',
+        'Honor prefers-reduced-motion globally — already wired in global.css.',
+      ]}
+      donts={[
+        'Don\'t add new keyframes — if you think you need one, question the need.',
+        'Don\'t animate cards on hover (scale, rotate, shadow grow) — visual noise.',
+        'Don\'t use scroll-triggered entrance animations.',
+        'Don\'t exceed 320ms on any transition — longer feels sluggish.',
+        'Don\'t use bouncing / spring easing — sticks out against the restrained tone.',
+      ]}
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .motion-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    margin: var(--space-8) 0;
+    padding: var(--space-12) var(--space-14);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+  }
+
+  .motion-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    background: var(--color-brand-lime);
+    color: var(--color-brand-ink-on-lime);
+    font-size: 12px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 7px 14px 7px 12px;
+    border-radius: var(--radius-pill);
+  }
+
+  .motion-tag--plain {
+    background: transparent;
+    color: var(--color-text-mute);
+    border: 1px solid var(--color-border-soft);
+  }
+
+  .motion-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-brand-ink-on-lime);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .motion-tokens {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .motion-token {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14);
+  }
+
+  .motion-token-name {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-brand-lime);
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+
+  .motion-token-value {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-mute);
+  }
+
+  .motion-token-use {
+    margin-top: var(--space-5);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  @media (max-width: 640px) {
+    .motion-tokens {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

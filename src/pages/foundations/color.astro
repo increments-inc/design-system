@@ -1,0 +1,246 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import ColorSwatch from '../../components/ColorSwatch.astro';
+import DoDont from '../../components/DoDont.astro';
+import Callout from '../../components/Callout.astro';
+---
+
+<BaseLayout
+  title="Color"
+  description="Dark-forest base, single electric lime accent, gradients, and semantic color tokens."
+>
+  <PageHeader
+    eyebrow="03 · Foundation"
+    title="Color"
+    italicWord="Color"
+    lede="Deep near-black surfaces as the canvas. One electric lime as the sole accent. Two defined gradients. Nothing else. The discipline of one accent is what makes the brand feel premium."
+  />
+
+  <Section title="Surfaces" kicker="Near-black with a green undertone">
+    <p>
+      The page background is <em>almost</em> black — but carries a subtle green undertone. Cards and
+      elevated surfaces lift progressively. Avoid introducing any warm-toned dark shades.
+    </p>
+    <div class="swatch-grid">
+      <ColorSwatch token="--color-surface-page" value="#09100C" role="Page background. The canvas under everything." />
+      <ColorSwatch token="--color-surface-card" value="#0F1F1A" role="Elevated cards. Primary surface for content." />
+      <ColorSwatch token="--color-surface-card-deep" value="#122824" role="Deeper surface for featured / testimonial cards." />
+      <ColorSwatch token="--color-surface-depth" value="#0B1815" role="Background radial-depth layer. Rarely used directly." />
+    </div>
+  </Section>
+
+  <Section title="Brand" kicker="One accent. That's the whole rule.">
+    <p>
+      Deep forest grounds. Bright lime punctuates. Every moment that calls the eye — a CTA, a featured
+      card, a big number, an italic accent word — uses lime. Nothing else does.
+    </p>
+    <div class="swatch-grid">
+      <ColorSwatch token="--color-brand-forest" value="#16312C" role="Deep forest. Used in gradients and as dark accent." />
+      <ColorSwatch token="--color-brand-lime" value="#C0FE71" role="Primary accent. CTAs, badges, italic-accent words." />
+      <ColorSwatch token="--color-brand-lime-light" value="#D4FE94" role="Lighter lime. Gradient pair with --color-brand-lime." />
+      <ColorSwatch token="--color-brand-ink-on-lime" value="#09100C" role="Text color when placed on lime surfaces." />
+    </div>
+  </Section>
+
+  <Section title="Text" kicker="Opacity stack on a white-green tint">
+    <p>
+      Text colors are layered by opacity on a near-white base (<code>#F3FBF4</code>) for a subtle
+      green cast. Don't use pure white — it feels clinical on this dark forest palette.
+    </p>
+    <div class="swatch-grid">
+      <ColorSwatch token="--color-text-strong" value="#F3FBF4" role="Headlines & primary text. 100% opacity." />
+      <ColorSwatch token="--color-text-body" value="rgba(243,251,244,0.72)" role="Body copy. 72% of strong." />
+      <ColorSwatch token="--color-text-mute" value="rgba(243,251,244,0.48)" role="Tertiary, muted, captions. 48%." />
+      <ColorSwatch token="--color-text-faint" value="rgba(243,251,244,0.32)" role="Meta, footer text, disclaimers. 32%." />
+    </div>
+  </Section>
+
+  <Section title="Lines" kicker="Tinted lime for dividers, neutral for structure">
+    <div class="swatch-grid">
+      <ColorSwatch token="--color-hairline-lime" value="rgba(192,254,113,0.10)" role="Subtle lime dividers. Inside cards, under rows." />
+      <ColorSwatch token="--color-border-lime" value="rgba(192,254,113,0.18)" role="Lime card borders. Standard emphasized border." />
+      <ColorSwatch token="--color-border-lime-strong" value="rgba(192,254,113,0.35)" role="Strongly emphasized borders (featured, focus)." />
+      <ColorSwatch token="--color-border-soft" value="rgba(243,251,244,0.08)" role="Neutral low-contrast borders. Default." />
+    </div>
+  </Section>
+
+  <Section title="State" kicker="Feedback colors — use sparingly">
+    <div class="swatch-grid">
+      <ColorSwatch token="--color-state-focus-ring" value="rgba(192,254,113,0.55)" role="Focus outlines. Always visible on keyboard." />
+      <ColorSwatch token="--color-state-success" value="#6EE7A0" role="Success states, confirmations." />
+      <ColorSwatch token="--color-state-warning" value="#F5C15E" role="Warning states, soft alerts." />
+      <ColorSwatch token="--color-state-danger" value="#F57A7A" role="Errors, destructive actions, 'Don't' markers." />
+    </div>
+  </Section>
+
+  <Section title="Gradients" kicker="Two — not more">
+    <p>
+      Only two gradients exist. One lifts (lime). One grounds (forest). Do not create new gradients,
+      rotation angles, or color stops — it breaks the optical consistency across surfaces.
+    </p>
+
+    <div class="gradient-row">
+      <div class="gradient-card gradient-card--lime">
+        <span class="gradient-card-label">--gradient-lime</span>
+        <code class="gradient-card-value">linear-gradient(135deg, #C0FE71 0%, #D4FE94 100%)</code>
+        <p class="gradient-card-role">Featured cards · CTA hero · project-example surfaces</p>
+      </div>
+      <div class="gradient-card gradient-card--forest">
+        <span class="gradient-card-label">--gradient-forest</span>
+        <code class="gradient-card-value">linear-gradient(135deg, #16312C 0%, #09100C 100%)</code>
+        <p class="gradient-card-role">"Why Now" callouts · bonus callouts · quota notes</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Atmospheric radial glows" kicker="The quiet third element">
+    <p>
+      Below tokens, below gradients — atmospheric radial glows live on the page background to break up
+      flatness. Never in the foreground. Softened further in print media.
+    </p>
+    <Callout variant="note" title="Screen (applied to body):">
+      <p>
+        <code>radial-gradient(circle at 92% -10%, rgba(192, 254, 113, 0.10), rgba(192, 254, 113, 0) 50%)</code>
+      </p>
+      <p>
+        <code>radial-gradient(circle at -10% 110%, rgba(22, 49, 44, 0.45), rgba(22, 49, 44, 0) 55%)</code>
+      </p>
+    </Callout>
+  </Section>
+
+  <Section title="Critical rule — never use transparent in gradient stops" kicker="PDF-export pitfall">
+    <p>
+      The CSS keyword <code>transparent</code> is defined as <code>rgba(0, 0, 0, 0)</code>. In a gradient,
+      the color interpolates <em>through black</em> from your starting color to zero-alpha, which creates
+      hard-edged color blobs in PDF rasterization.
+    </p>
+    <pre><code>{`/* Wrong — fades through black, turns into blobs in PDF */
+background: radial-gradient(circle,
+  rgba(192, 254, 113, 0.16) 0%,
+  transparent 70%);
+
+/* Right — fades cleanly to invisible same color */
+background: radial-gradient(circle,
+  rgba(192, 254, 113, 0.16) 0%,
+  rgba(192, 254, 113, 0) 70%);`}</code></pre>
+    <p>
+      This bug cost several iterations during flyer production. It's codified as a linter rule in print
+      contexts — and worth honoring everywhere else too.
+    </p>
+  </Section>
+
+  <Section title="Usage rules">
+    <DoDont
+      dos={[
+        'Keep 95% of any layout in deep-dark surfaces; reserve lime for exceptions.',
+        'Use --color-brand-ink-on-lime (#09100C) for text on lime surfaces.',
+        'Use rgba(same-color, 0) in gradient stops — never the transparent keyword.',
+        'Strike through regular prices with rgba(243, 251, 244, 0.35) — never hide them.',
+        'Layer multiple elevations with --color-surface-card and --color-surface-card-deep.',
+      ]}
+      donts={[
+        'Don\'t introduce a second accent color — no teal, orange, purple, anything.',
+        'Don\'t place body copy directly on lime — readability collapses.',
+        'Don\'t use pure white (#FFFFFF) for text — it clashes with the green undertone.',
+        'Don\'t build new gradients beyond --gradient-lime and --gradient-forest.',
+        'Don\'t lighten the page background "for contrast" — dark is the surface, not the theme.',
+      ]}
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .gradient-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-9);
+    margin-top: var(--space-8);
+  }
+
+  .gradient-card {
+    border-radius: var(--radius-xl);
+    padding: var(--space-14) var(--space-14) var(--space-14);
+    min-height: 200px;
+  }
+
+  .gradient-card--lime {
+    background: var(--gradient-lime);
+    color: var(--color-brand-ink-on-lime);
+    box-shadow: var(--shadow-cta-panel);
+  }
+
+  .gradient-card--forest {
+    background: var(--gradient-forest);
+    border: 1px solid var(--color-border-lime);
+    color: var(--color-text-strong);
+  }
+
+  .gradient-card-label {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: var(--type-weight-bold);
+    margin-bottom: var(--space-5);
+  }
+
+  .gradient-card--lime .gradient-card-label {
+    color: var(--color-brand-forest);
+  }
+
+  .gradient-card--forest .gradient-card-label {
+    color: var(--color-brand-lime);
+  }
+
+  .gradient-card-value {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1.6;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    word-break: break-word;
+  }
+
+  .gradient-card--lime .gradient-card-value {
+    color: rgba(9, 16, 12, 0.78);
+  }
+
+  .gradient-card--forest .gradient-card-value {
+    color: var(--color-text-body);
+  }
+
+  .gradient-card-role {
+    margin-top: var(--space-7);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .gradient-card--lime .gradient-card-role {
+    color: rgba(9, 16, 12, 0.72);
+  }
+
+  @media (max-width: 1060px) {
+    .swatch-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .gradient-row {
+      grid-template-columns: 1fr;
+    }
+    .swatch-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,356 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import TokenTable from '../../components/TokenTable.astro';
+import DoDont from '../../components/DoDont.astro';
+import Callout from '../../components/Callout.astro';
+
+/**
+ * Color-contrast calculator.
+ * Returns the WCAG contrast ratio between two sRGB hex colors.
+ */
+function luminance(r: number, g: number, b: number): number {
+  const toLinear = (channel: number) => {
+    const v = channel / 255;
+    return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
+}
+
+function hexToRgb(hex: string): [number, number, number] {
+  const normalized = hex.replace('#', '');
+  const value = parseInt(normalized, 16);
+  return [(value >> 16) & 0xff, (value >> 8) & 0xff, value & 0xff];
+}
+
+function contrastRatio(a: string, b: string): number {
+  const [r1, g1, b1] = hexToRgb(a);
+  const [r2, g2, b2] = hexToRgb(b);
+  const l1 = luminance(r1, g1, b1);
+  const l2 = luminance(r2, g2, b2);
+  const brighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return (brighter + 0.05) / (darker + 0.05);
+}
+
+function rating(ratio: number): string {
+  if (ratio >= 7) return 'AAA';
+  if (ratio >= 4.5) return 'AA';
+  if (ratio >= 3) return 'AA Large';
+  return 'Fail';
+}
+
+const contrastPairs = [
+  { fg: '#F3FBF4', bg: '#09100C', label: 'Strong text on page background' },
+  { fg: '#F3FBF4', bg: '#0F1F1A', label: 'Strong text on card' },
+  { fg: '#C0FE71', bg: '#09100C', label: 'Lime accent on page background' },
+  { fg: '#09100C', bg: '#C0FE71', label: 'Forest ink on lime (CTA)' },
+  { fg: '#09100C', bg: '#D4FE94', label: 'Forest ink on lime-light (gradient end)' },
+];
+
+const rows = contrastPairs.map((p) => {
+  const ratio = contrastRatio(p.fg, p.bg);
+  return {
+    ...p,
+    ratio: ratio.toFixed(2) + ':1',
+    rating: rating(ratio),
+  };
+});
+---
+
+<BaseLayout
+  title="Accessibility"
+  description="Contrast targets, keyboard navigation, focus states, and motion preferences."
+>
+  <PageHeader
+    eyebrow="11 · Foundation"
+    title="Accessibility"
+    italicWord="Accessibility"
+    lede="Dark theme, lime accent, editorial italics — none of it matters if users can't see, read, or operate it. WCAG 2.1 AA is the baseline. Every token pairing below has been checked."
+  />
+
+  <Section title="Contrast targets" kicker="WCAG 2.1 AA is non-negotiable">
+    <p>
+      The combinations below are the canonical color pairings in the system. Every one meets WCAG 2.1
+      AA for normal text (4.5:1) or AA Large (3:1). If you create a new pairing not on this list,
+      check it before shipping.
+    </p>
+
+    <div class="contrast-table">
+      <div class="contrast-row contrast-row--head">
+        <span>Pairing</span>
+        <span>Foreground</span>
+        <span>Background</span>
+        <span>Ratio</span>
+        <span>Rating</span>
+      </div>
+      {rows.map((r) => (
+        <div class="contrast-row">
+          <span class="contrast-label">{r.label}</span>
+          <span class="contrast-swatch" style={`background: ${r.fg};`}>{r.fg}</span>
+          <span class="contrast-swatch" style={`background: ${r.bg}; color: ${r.fg};`}>{r.bg}</span>
+          <span class="contrast-ratio">{r.ratio}</span>
+          <span class={`contrast-rating contrast-rating--${r.rating.toLowerCase().replace(' ', '-')}`}>{r.rating}</span>
+        </div>
+      ))}
+    </div>
+
+    <Callout variant="warning" title="Body copy color caveat">
+      <p>
+        <code>--color-text-body</code> sits at 72% opacity against <code>#09100C</code>, which computes
+        to ~10:1 — well above AA. <code>--color-text-mute</code> at 48% computes to ~6:1 — still AA.
+        Anything below 48% (e.g. <code>--color-text-faint</code>) should only be used for decorative
+        meta, never primary content.
+      </p>
+    </Callout>
+  </Section>
+
+  <Section title="Focus states" kicker="Always visible for keyboard users">
+    <p>
+      Every interactive element surfaces a <strong>2px lime outline at 55% opacity</strong> on
+      <code>:focus-visible</code>, with a 3px offset. This is wired globally in <code>global.css</code>.
+      Never suppress it.
+    </p>
+
+    <div class="focus-demo">
+      <button class="focus-btn focus-btn--primary" type="button">Primary button</button>
+      <button class="focus-btn focus-btn--secondary" type="button">Secondary button</button>
+      <a class="focus-btn focus-btn--link" href="#">Text link</a>
+      <input class="focus-input" type="text" placeholder="Try tabbing through these" />
+    </div>
+
+    <p class="focus-note">
+      <strong>Tab</strong> through the elements above to see the focus ring — lime, crisp, 3px offset.
+      <em>Never</em> remove this with <code>outline: none</code>.
+    </p>
+  </Section>
+
+  <Section title="Keyboard navigation" kicker="Everything operable without a mouse">
+    <TokenTable
+      columns={[
+        { label: 'Pattern' },
+        { label: 'Rule' },
+      ]}
+      rows={[
+        ['Every interactive element', 'Reachable via Tab, activatable via Enter/Space.'],
+        ['Disclosures (accordion, collapse)', 'Toggled via Enter/Space on a focusable header.'],
+        ['Menus & sidebars', 'Arrow-key navigation within, Escape to close.'],
+        ['Modal dialogs', 'Focus trapped inside when open; Escape closes; focus returns to opener.'],
+        ['Tab order', 'Follows reading order. No tabindex values above 0.'],
+      ]}
+    />
+  </Section>
+
+  <Section title="Semantic markup" kicker="Meaning before style">
+    <ul class="semantic-list">
+      <li>Use native HTML elements wherever possible: <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>. Don't build buttons out of <code>&lt;div&gt;</code>s.</li>
+      <li>Headings follow document hierarchy (<code>h1 → h2 → h3</code>). Never skip levels for styling.</li>
+      <li>Form inputs always have an associated <code>&lt;label&gt;</code>.</li>
+      <li>Icons that convey meaning must have a text equivalent (<code>aria-label</code>). Decorative icons get <code>aria-hidden="true"</code>.</li>
+      <li>The logo SVG exposes <code>role="img"</code> + <code>aria-label="Increments Inc."</code>.</li>
+    </ul>
+  </Section>
+
+  <Section title="Motion preferences" kicker="prefers-reduced-motion">
+    <p>
+      All animation durations and transitions collapse to near-zero when the user has enabled reduced
+      motion at the OS level. This includes the status-tag pulse, sidebar hover transitions, and any
+      future scroll or card animations. Wired globally in <code>global.css</code>.
+    </p>
+  </Section>
+
+  <Section title="Usage rules">
+    <DoDont
+      dos={[
+        'Target WCAG 2.1 AA (4.5:1 for body text, 3:1 for UI chrome and large text).',
+        'Preserve :focus-visible rings — lime outline at 55% with 3px offset.',
+        'Use native semantic HTML (<button>, <a>, <nav>) wherever possible.',
+        'Give every icon that carries meaning an aria-label; hide decorative ones.',
+        'Test with keyboard-only — every interactive element must be reachable.',
+      ]}
+      donts={[
+        'Don\'t use outline: none — it breaks keyboard users silently.',
+        'Don\'t use --color-text-faint (32%) for primary content.',
+        'Don\'t build buttons or links out of <div> elements.',
+        'Don\'t skip heading levels (h1 → h3) for visual size reasons.',
+        'Don\'t rely on color alone to convey state — pair with icon or text.',
+      ]}
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .contrast-table {
+    margin-top: var(--space-8);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .contrast-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: var(--space-7) var(--space-12);
+    border-bottom: 1px solid var(--color-border-soft);
+    gap: var(--space-5);
+    font-size: 13px;
+  }
+
+  .contrast-row:last-child { border-bottom: 0; }
+
+  .contrast-row--head {
+    background: rgba(192, 254, 113, 0.04);
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-mute);
+  }
+
+  .contrast-label {
+    color: var(--color-text-body);
+  }
+
+  .contrast-swatch {
+    display: inline-block;
+    text-align: center;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: var(--type-weight-bold);
+    color: var(--color-brand-forest);
+  }
+
+  .contrast-ratio {
+    font-family: var(--font-mono);
+    font-weight: var(--type-weight-bold);
+    color: var(--color-text-strong);
+  }
+
+  .contrast-rating {
+    font-size: 10.5px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    text-align: center;
+    justify-self: start;
+  }
+
+  .contrast-rating--aaa { background: var(--color-brand-lime); color: var(--color-brand-ink-on-lime); }
+  .contrast-rating--aa  { background: rgba(192, 254, 113, 0.2); color: var(--color-brand-lime); border: 1px solid var(--color-border-lime); }
+  .contrast-rating--aa-large { background: transparent; color: var(--color-state-warning); border: 1px solid rgba(245, 193, 94, 0.35); }
+  .contrast-rating--fail { background: transparent; color: var(--color-state-danger); border: 1px solid var(--color-state-danger); }
+
+  .focus-demo {
+    margin-top: var(--space-8);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    padding: var(--space-12) var(--space-14);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    align-items: center;
+  }
+
+  .focus-btn {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: -0.005em;
+    padding: 10px 18px;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--motion-default) var(--motion-ease);
+  }
+
+  .focus-btn--primary {
+    background: var(--color-brand-lime);
+    color: var(--color-brand-ink-on-lime);
+  }
+
+  .focus-btn--secondary {
+    background: transparent;
+    color: var(--color-brand-lime);
+    border-color: var(--color-border-lime);
+  }
+
+  .focus-btn--link {
+    background: transparent;
+    color: var(--color-brand-lime);
+    border-color: transparent;
+    padding: 10px 6px;
+    text-decoration: underline;
+    text-decoration-color: var(--color-hairline-lime);
+    text-underline-offset: 3px;
+  }
+
+  .focus-input {
+    flex: 1;
+    min-width: 220px;
+    background: transparent;
+    color: var(--color-text-strong);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+  }
+
+  .focus-input::placeholder {
+    color: var(--color-text-mute);
+  }
+
+  .focus-note {
+    margin-top: var(--space-6);
+    font-size: 13.5px;
+    color: var(--color-text-body);
+  }
+
+  .semantic-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-5);
+    max-width: 72ch;
+  }
+
+  .semantic-list li {
+    position: relative;
+    padding-left: 22px;
+    margin-top: var(--space-5);
+    line-height: 1.6;
+  }
+
+  .semantic-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: var(--color-brand-lime);
+    border-radius: 2px;
+    box-shadow: var(--shadow-icon-tile);
+  }
+
+  @media (max-width: 760px) {
+    .contrast-row {
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+      padding: var(--space-8);
+    }
+    .contrast-row--head {
+      display: none;
+    }
+    .contrast-swatch {
+      justify-self: start;
+    }
+  }
+</style>

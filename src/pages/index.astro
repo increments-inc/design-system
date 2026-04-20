@@ -1,0 +1,326 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+/**
+ * Landing page — hero + foundation index cards.
+ */
+
+const foundationCards = [
+  {
+    number: '01',
+    title: 'Introduction',
+    href: '/foundations/introduction/',
+    summary: 'What this design system is, who it\'s for, and how to apply it across product, marketing, and sales.',
+  },
+  {
+    number: '02',
+    title: 'Brand Essence',
+    href: '/foundations/brand-essence/',
+    summary: 'The mood, design principles, and north star that keep every surface consistent.',
+  },
+  {
+    number: '03',
+    title: 'Color',
+    href: '/foundations/color/',
+    summary: 'Dark-forest base, single lime accent, gradients, and semantic roles.',
+  },
+  {
+    number: '04',
+    title: 'Typography',
+    href: '/foundations/typography/',
+    summary: 'Inter for structure, Instrument Serif for emotional lift — and the italic-accent rule.',
+  },
+  {
+    number: '05',
+    title: 'Spacing & Layout',
+    href: '/foundations/spacing-layout/',
+    summary: 'Spacing scale, grid patterns, breakpoints, and the A4 print canvas.',
+  },
+  {
+    number: '06',
+    title: 'Radii & Elevation',
+    href: '/foundations/radii-elevation/',
+    summary: 'Radius tokens by role, shadow system with lime-tinted glows.',
+  },
+  {
+    number: '07',
+    title: 'Iconography',
+    href: '/foundations/iconography/',
+    summary: 'Lime tile + dark glyph pattern, approved glyph palette, restraint rules.',
+  },
+  {
+    number: '08',
+    title: 'Motion',
+    href: '/foundations/motion/',
+    summary: 'One animation — the status-tag pulse. Everything else stays still.',
+  },
+  {
+    number: '09',
+    title: 'Logo',
+    href: '/foundations/logo/',
+    summary: 'Inline-SVG pattern, sizing, clear-space, and the rules that keep exports clean.',
+  },
+  {
+    number: '10',
+    title: 'Voice & Content',
+    href: '/foundations/voice-content/',
+    summary: 'Copy ↔ design alignment. Italic-word headline pattern. Contact footer convention.',
+  },
+  {
+    number: '11',
+    title: 'Accessibility',
+    href: '/foundations/accessibility/',
+    summary: 'Contrast targets, focus states, keyboard navigation, motion preferences.',
+  },
+  {
+    number: '12',
+    title: 'Tokens',
+    href: '/foundations/tokens/',
+    summary: 'CSS custom properties and Figma variable names — single source of truth.',
+  },
+];
+---
+
+<BaseLayout
+  title="Design System"
+  description="Increments Inc. Enterprise Design System — brand foundations, components, patterns, and tokens."
+>
+  <section class="hero">
+    <span class="hero-kicker">10-Year Anniversary · v0.1</span>
+    <h1 class="hero-title">
+      The <em>Increments</em> Design System.
+    </h1>
+    <p class="hero-lede">
+      A single source of truth for every product screen, marketing flyer, deck, landing page,
+      and email we ship. Dark, premium, opinionated — and built to scale across every surface.
+    </p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-value">12</span>
+        <span class="hero-meta-label">Brand<br />Foundations</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-value">30+</span>
+        <span class="hero-meta-label">Components<br />(coming)</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-value">15</span>
+        <span class="hero-meta-label">Patterns<br />(coming)</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-value">1</span>
+        <span class="hero-meta-label">Source<br />of truth</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="foundations">
+    <div class="foundations-head">
+      <span class="eyebrow">Part I · Ready now</span>
+      <h2 class="foundations-title">Brand <em>Foundations</em></h2>
+      <p class="foundations-lede">
+        The building blocks — color, type, space, shadow, motion, and the copy conventions
+        that connect them. Everything else in the system is derived from these 12 pages.
+      </p>
+    </div>
+
+    <div class="foundations-grid">
+      {foundationCards.map((card) => (
+        <a href={card.href} class="foundation-card">
+          <span class="foundation-card-number">{card.number}</span>
+          <h3 class="foundation-card-title">{card.title}</h3>
+          <p class="foundation-card-summary">{card.summary}</p>
+          <span class="foundation-card-arrow" aria-hidden="true">→</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-16) 0 var(--space-16);
+    max-width: 840px;
+  }
+
+  .hero-kicker {
+    display: inline-block;
+    font-size: var(--type-caption);
+    font-weight: var(--type-weight-bold);
+    letter-spacing: var(--type-tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+    margin-bottom: var(--space-9);
+  }
+
+  .hero-title {
+    font-size: clamp(42px, 6vw, 68px);
+    font-weight: var(--type-weight-black);
+    letter-spacing: var(--type-tracking-tight);
+    line-height: 1.02;
+    color: var(--color-text-strong);
+  }
+
+  .hero-title em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-lede {
+    margin-top: var(--space-10);
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+    max-width: 62ch;
+  }
+
+  .hero-meta {
+    margin-top: var(--space-16);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-9);
+    padding: var(--space-10) 0;
+    border-top: 1px solid var(--color-border-soft);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .hero-meta-value {
+    font-size: 36px;
+    font-weight: var(--type-weight-black);
+    letter-spacing: -0.04em;
+    color: var(--color-brand-lime);
+    line-height: 1;
+  }
+
+  .hero-meta-label {
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-mute);
+    line-height: 1.35;
+  }
+
+  .foundations {
+    margin-top: var(--space-20);
+  }
+
+  .foundations-head {
+    margin-bottom: var(--space-16);
+  }
+
+  .foundations-title {
+    margin-top: var(--space-3);
+    font-size: clamp(30px, 3.5vw, 40px);
+    font-weight: var(--type-weight-black);
+    letter-spacing: var(--type-tracking-tight);
+    line-height: 1.08;
+  }
+
+  .foundations-title em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+
+  .foundations-lede {
+    margin-top: var(--space-6);
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+    max-width: 66ch;
+  }
+
+  .foundations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-9);
+  }
+
+  .foundation-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-12) var(--space-14) var(--space-12);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    color: var(--color-text-body);
+    text-decoration: none;
+    transition: transform var(--motion-default) var(--motion-ease),
+      border-color var(--motion-default) var(--motion-ease),
+      background var(--motion-default) var(--motion-ease);
+    overflow: hidden;
+  }
+
+  .foundation-card:hover {
+    border-color: var(--color-border-lime);
+    transform: translateY(-2px);
+    background: var(--color-surface-card-deep);
+  }
+
+  .foundation-card-number {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    font-size: 20px;
+    color: var(--color-brand-lime);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+  }
+
+  .foundation-card-title {
+    font-size: 20px;
+    font-weight: var(--type-weight-heavy);
+    color: var(--color-text-strong);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: var(--space-4);
+  }
+
+  .foundation-card-summary {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--color-text-body);
+    max-width: none;
+  }
+
+  .foundation-card-arrow {
+    display: inline-block;
+    margin-top: var(--space-9);
+    font-size: 18px;
+    color: var(--color-brand-lime);
+    transition: transform var(--motion-default) var(--motion-ease);
+  }
+
+  .foundation-card:hover .foundation-card-arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 880px) {
+    .foundations-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .hero-meta {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-10);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .foundations-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

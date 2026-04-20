@@ -1,0 +1,82 @@
+---
+/**
+ * PageHeader — eyebrow + H1 + lede paragraph at the top of every foundation page.
+ * Uses the italic-accent convention: one word of the title in Instrument Serif lime.
+ */
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  italicWord?: string;
+  lede?: string;
+};
+
+const { eyebrow, title, italicWord, lede } = Astro.props;
+
+/**
+ * Split the title so the italic word can be wrapped in an <em>.
+ * Returns [before, italic, after] where italic is the matched word (or empty if not found).
+ */
+function splitTitle(source: string, word?: string): [string, string, string] {
+  if (!word) return [source, '', ''];
+  const index = source.indexOf(word);
+  if (index === -1) return [source, '', ''];
+  return [
+    source.slice(0, index),
+    word,
+    source.slice(index + word.length),
+  ];
+}
+
+const [before, italic, after] = splitTitle(title, italicWord);
+---
+
+<header class="page-header">
+  <span class="eyebrow">{eyebrow}</span>
+  <h1 class="page-header-title">
+    {before}<em>{italic}</em>{after}
+  </h1>
+  {lede && <p class="page-header-lede">{lede}</p>}
+</header>
+
+<style>
+  .page-header {
+    margin-bottom: var(--space-16);
+    padding-bottom: var(--space-12);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: var(--type-caption);
+    font-weight: var(--type-weight-bold);
+    letter-spacing: var(--type-tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+    margin-bottom: var(--space-6);
+  }
+
+  .page-header-title {
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: var(--type-weight-black);
+    letter-spacing: var(--type-tracking-tight);
+    line-height: 1.04;
+    color: var(--color-text-strong);
+  }
+
+  .page-header-title em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+    letter-spacing: -0.02em;
+  }
+
+  .page-header-lede {
+    margin-top: var(--space-8);
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+    max-width: 64ch;
+  }
+</style>

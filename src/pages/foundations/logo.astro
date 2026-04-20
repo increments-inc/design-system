@@ -1,0 +1,333 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import DoDont from '../../components/DoDont.astro';
+import Callout from '../../components/Callout.astro';
+import LogoMark from '../../components/Logo.astro';
+---
+
+<BaseLayout
+  title="Logo"
+  description="Logo mark, the inline-SVG pattern, sizing rules, and clear-space."
+>
+  <PageHeader
+    eyebrow="09 · Foundation"
+    title="Logo"
+    italicWord="Logo"
+    lede="The wordmark is the brand signature. It's inlined SVG — never an image tag, never a <symbol> reference. These rules exist because they kept breaking in PDF export and we want you not to re-learn them."
+  />
+
+  <Section title="The mark" kicker="Wordmark — no icon variant">
+    <p>
+      Increments uses a wordmark only — there is no separate icon mark. In very small contexts (favicon,
+      app icon) we render a single lime bar on a dark-forest rounded square. Never crop the wordmark.
+    </p>
+
+    <div class="logo-stage logo-stage--dark">
+      <LogoMark width={260} height={42} color="#ffffff" />
+    </div>
+    <div class="logo-stage logo-stage--lime">
+      <LogoMark width={260} height={42} color="#09100C" />
+    </div>
+  </Section>
+
+  <Section title="Sizing" kicker="24px minimum, 145px default in headers">
+    <div class="sizing-grid">
+      <div class="sizing-card">
+        <LogoMark width={96} height={16} />
+        <span class="sizing-label">16px height</span>
+        <p class="sizing-note">Inline with body copy, print meta lines.</p>
+      </div>
+      <div class="sizing-card">
+        <LogoMark width={145} height={24} />
+        <span class="sizing-label">24px height · default</span>
+        <p class="sizing-note">Page headers, footer brand line.</p>
+      </div>
+      <div class="sizing-card">
+        <LogoMark width={260} height={42} />
+        <span class="sizing-label">42px height</span>
+        <p class="sizing-note">Hero sections, cover pages.</p>
+      </div>
+    </div>
+    <p>
+      <strong>Never scale below 16px in height</strong> — the period glyph collapses visually. Default
+      header size is 24px. For hero sections, 42px is the maximum — beyond that, ask whether the logo
+      really needs to dominate the composition.
+    </p>
+  </Section>
+
+  <Section title="Clear space" kicker="Protect the wordmark from crowding">
+    <p>
+      Keep at least <strong>1× the wordmark height</strong> as clear space on every side. Don't place
+      text, icons, or borders inside this zone.
+    </p>
+
+    <div class="clearspace-demo">
+      <div class="clearspace-wrap">
+        <LogoMark width={200} height={32} />
+      </div>
+      <p class="clearspace-note">Dashed outline = minimum clear space (1× wordmark height on every side).</p>
+    </div>
+  </Section>
+
+  <Section title="The inline-SVG pattern" kicker="Never &lt;symbol&gt; + &lt;use&gt;">
+    <Callout variant="warning" title="Hard-earned rule — don't skip.">
+      <p>
+        Using <code>&lt;symbol id="logo"&gt;</code> + <code>&lt;use href="#logo"&gt;</code> <em>fails
+        silently</em> in several PDF rasterization engines. The logo renders empty in the export even
+        though it looks fine on screen. Always inline the full paths in every header.
+      </p>
+    </Callout>
+
+    <p>Five rules to follow every time the logo is rendered:</p>
+
+    <ol class="logo-rules">
+      <li>
+        <strong>Inline the full paths.</strong> No <code>&lt;use href="#..."&gt;</code>, no cross-file
+        SVG references, no background-image tricks.
+      </li>
+      <li>
+        <strong>Explicit width + height attributes.</strong> Always set <code>width="145" height="24"</code>
+        (or similar) on the <code>&lt;svg&gt;</code> root. Collapsing renderers otherwise.
+      </li>
+      <li>
+        <strong>Correct viewBox: <code>"115 308 1211 200"</code>.</strong> This matches the coordinate
+        frame of the master <code>Logo.svg</code>.
+      </li>
+      <li>
+        <strong>Force fill via CSS</strong>, not <code>currentColor</code>. Use:
+        <pre><code>{`.logo-svg,
+.logo-svg g,
+.logo-svg path {
+  fill: #ffffff;
+}`}</code></pre>
+      </li>
+      <li>
+        <strong>No negative margin-left bleed.</strong> The logo sits at the standard inner-padding
+        boundary — don't push it left of the content grid.
+      </li>
+    </ol>
+
+    <p>
+      The reusable <code>&lt;Logo /&gt;</code> Astro component in this design system already applies all
+      five rules. Use it directly instead of hand-rolling inline SVG:
+    </p>
+
+    <pre><code>{`---
+import Logo from '@/components/Logo.astro';
+---
+
+<Logo width={145} height={24} color="#ffffff" />`}</code></pre>
+  </Section>
+
+  <Section title="Color usage">
+    <div class="color-usage-grid">
+      <div class="color-usage-card color-usage-card--dark">
+        <LogoMark width={160} height={26} color="#ffffff" />
+        <span class="color-usage-label">White on dark</span>
+        <p class="color-usage-note">Default. Used in every header against the page background.</p>
+      </div>
+      <div class="color-usage-card color-usage-card--lime">
+        <LogoMark width={160} height={26} color="#09100C" />
+        <span class="color-usage-label">Forest on lime</span>
+        <p class="color-usage-note">For placements on lime CTA panels.</p>
+      </div>
+      <div class="color-usage-card color-usage-card--forbidden">
+        <LogoMark width={160} height={26} color="#C0FE71" />
+        <span class="color-usage-label">Lime anywhere else</span>
+        <p class="color-usage-note">Forbidden. Lime logo on dark creates vibration.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Usage rules">
+    <DoDont
+      dos={[
+        'Use the <Logo /> Astro component — it bakes in all five inline-SVG rules.',
+        'Set explicit width + height attributes every time.',
+        'Keep 1× wordmark-height clear space on every side.',
+        'Default to 24px height in page headers, 42px in hero sections.',
+        'White on dark backgrounds; forest on lime backgrounds.',
+      ]}
+      donts={[
+        'Don\'t use <symbol> + <use> — silent fail in PDF export.',
+        'Don\'t render the logo in lime — only white or forest.',
+        'Don\'t scale below 16px height — the period glyph collapses.',
+        'Don\'t add a negative-margin bleed to the logo — sits at padding boundary.',
+        'Don\'t place the logo inside a bordered box or badge — it stands alone.',
+      ]}
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .logo-stage {
+    display: grid;
+    place-items: center;
+    padding: var(--space-20) var(--space-14);
+    border-radius: var(--radius-2xl);
+    margin-top: var(--space-8);
+  }
+
+  .logo-stage + .logo-stage {
+    margin-top: var(--space-7);
+  }
+
+  .logo-stage--dark {
+    background: var(--color-surface-card-deep);
+    border: 1px solid var(--color-border-soft);
+  }
+
+  .logo-stage--lime {
+    background: var(--gradient-lime);
+  }
+
+  .sizing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .sizing-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14);
+    min-height: 180px;
+    justify-content: center;
+  }
+
+  .sizing-label {
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+  }
+
+  .sizing-note {
+    font-size: 13px;
+    color: var(--color-text-body);
+  }
+
+  .clearspace-demo {
+    margin-top: var(--space-8);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-14);
+  }
+
+  .clearspace-wrap {
+    display: inline-block;
+    padding: 32px;
+    border: 1px dashed rgba(192, 254, 113, 0.3);
+    border-radius: var(--radius-md);
+  }
+
+  .clearspace-note {
+    margin-top: var(--space-9);
+    font-size: 13px;
+    color: var(--color-text-mute);
+  }
+
+  .logo-rules {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-8);
+    counter-reset: logo-rule;
+  }
+
+  .logo-rules li {
+    position: relative;
+    counter-increment: logo-rule;
+    padding-left: 48px;
+    margin-top: var(--space-9);
+    line-height: 1.55;
+  }
+
+  .logo-rules li::before {
+    content: counter(logo-rule, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    font-size: 22px;
+    color: var(--color-brand-lime);
+  }
+
+  .color-usage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .color-usage-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    padding: var(--space-12) var(--space-14);
+    border-radius: var(--radius-xl);
+    min-height: 180px;
+  }
+
+  .color-usage-card--dark {
+    background: var(--color-surface-card-deep);
+    border: 1px solid var(--color-border-soft);
+  }
+
+  .color-usage-card--lime {
+    background: var(--gradient-lime);
+  }
+
+  .color-usage-card--forbidden {
+    background: var(--color-surface-card-deep);
+    border: 1px dashed var(--color-state-danger);
+    opacity: 0.85;
+  }
+
+  .color-usage-label {
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .color-usage-card--dark .color-usage-label,
+  .color-usage-card--forbidden .color-usage-label {
+    color: var(--color-brand-lime);
+  }
+
+  .color-usage-card--lime .color-usage-label {
+    color: var(--color-brand-forest);
+  }
+
+  .color-usage-card--forbidden .color-usage-label {
+    color: var(--color-state-danger);
+  }
+
+  .color-usage-note {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  .color-usage-card--lime .color-usage-note {
+    color: rgba(9, 16, 12, 0.76);
+  }
+
+  @media (max-width: 880px) {
+    .sizing-grid, .color-usage-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

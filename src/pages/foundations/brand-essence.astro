@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Callout from '../../components/Callout.astro';
+import TokenTable from '../../components/TokenTable.astro';
+---
+
+<BaseLayout
+  title="Brand Essence"
+  description="The mood, design principles, and north star behind every Increments surface."
+>
+  <PageHeader
+    eyebrow="02 · Foundation"
+    title="Brand Essence"
+    italicWord="Essence"
+    lede="Before a single token, a single pixel — this is the feeling the work needs to project. Confident. Premium. Serious-but-approachable. One accent, not five. Breathing room, not density."
+  />
+
+  <Section title="The north star">
+    <Callout variant="accent" title="Premium SaaS brochure, not agency flyer">
+      <p>
+        Every surface we ship should feel closer to a Stripe product page or a Linear release note
+        than to a commission-hungry marketing flyer. Less is more. Restraint signals expensive.
+      </p>
+    </Callout>
+  </Section>
+
+  <Section title="Brand dimensions">
+    <TokenTable
+      columns={[
+        { label: 'Dimension' },
+        { label: 'Value' },
+      ]}
+      rows={[
+        ['Mood', 'Confident · premium · serious-but-approachable'],
+        ['Contrast strategy', 'Deep forest dark + a single electric lime accent'],
+        ['Tone in type', 'Modern sans (Inter) grounded by editorial italic (Instrument Serif)'],
+        ['Surface philosophy', 'Near-black base, subtle radial glows, crisp lime edges — no stock art'],
+        ['Whitespace', 'Generous; density signals cheap — space signals expensive'],
+        ['Page density', 'Luxury / breathing-room beats density — more pages beats crammed pages'],
+      ]}
+    />
+  </Section>
+
+  <Section title="The six principles">
+    <div class="principles-grid">
+      <article class="principle">
+        <span class="principle-number">01</span>
+        <h3>One accent moment per viewport</h3>
+        <p>
+          Either the featured card <em>or</em> the CTA — never both dominant on the same screen. Scarcity
+          is what makes lime feel expensive.
+        </p>
+      </article>
+
+      <article class="principle">
+        <span class="principle-number">02</span>
+        <h3>Italic as emotional lift</h3>
+        <p>
+          One or two words per display headline swap to Instrument Serif italic in lime. The italic word
+          carries the emotion — <em>recurring</em>, <em>paid</em>, <em>partner</em>, <em>you</em>.
+        </p>
+      </article>
+
+      <article class="principle">
+        <span class="principle-number">03</span>
+        <h3>Dark is the surface, not a theme</h3>
+        <p>
+          95% of any layout stays deep-dark. Lime is the exception that punctuates. Don't add a second
+          accent color. Don't lighten the background "for contrast."
+        </p>
+      </article>
+
+      <article class="principle">
+        <span class="principle-number">04</span>
+        <h3>Breathing room beats density</h3>
+        <p>
+          More pages beats crammed pages. Wider margins beat tighter ones. If it feels empty, it's
+          probably right — density is what agencies do to look busy.
+        </p>
+      </article>
+
+      <article class="principle">
+        <span class="principle-number">05</span>
+        <h3>Tokens, not tastes</h3>
+        <p>
+          Every color, radius, shadow, and spacing decision is a token with a defined role. Don't pick
+          <em>one that looks nice</em> — pick the one that matches the role.
+        </p>
+      </article>
+
+      <article class="principle">
+        <span class="principle-number">06</span>
+        <h3>No stock art, ever</h3>
+        <p>
+          No photography, no illustration libraries, no duo-tone icon packs. Geometric shapes, glyph
+          icons on lime tiles, and radial atmospheric glows do the heavy lifting.
+        </p>
+      </article>
+    </div>
+  </Section>
+
+  <Section title="Canonical italic-accent moments">
+    <p>Every hero H1 in the marketing system wears this pattern. Learn the rhythm:</p>
+    <ul class="canonicals">
+      <li>Custom software at <em>25% off</em>, locked for 24 months.</li>
+      <li>Turn your network into <em>recurring</em> six-figure income.</li>
+      <li>Run your own agency. Keep the <em>client</em>. Let us deliver.</li>
+      <li>You close deals. We deliver. <em>Up to 25%</em> commission.</li>
+      <li>You built this with us. Now let us build something <em>greater</em> — together.</li>
+    </ul>
+  </Section>
+</BaseLayout>
+
+<style>
+  .principles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-9);
+  }
+
+  .principle {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14) var(--space-14);
+  }
+
+  .principle-number {
+    display: inline-block;
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    font-size: 22px;
+    color: var(--color-brand-lime);
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-6);
+  }
+
+  .principle h3 {
+    font-size: 18px;
+    font-weight: var(--type-weight-heavy);
+    color: var(--color-text-strong);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    margin-bottom: var(--space-4);
+  }
+
+  .principle p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+    max-width: none;
+  }
+
+  .principle em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+
+  .canonicals {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-8);
+    max-width: 70ch;
+  }
+
+  .canonicals li {
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--color-border-soft);
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--color-text-strong);
+    font-weight: var(--type-weight-bold);
+    letter-spacing: -0.02em;
+  }
+
+  .canonicals li:last-child {
+    border-bottom: 0;
+  }
+
+  .canonicals em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+
+  @media (max-width: 760px) {
+    .principles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

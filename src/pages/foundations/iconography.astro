@@ -1,0 +1,355 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import DoDont from '../../components/DoDont.astro';
+
+/**
+ * Curated Lucide icon set for Increments — one per role.
+ * Every icon needed across product, marketing, and flyers maps to one of these.
+ */
+const iconPalette = [
+  { name: 'check',      label: 'Confirmation · success' },
+  { name: 'zap',        label: 'Speed · instant' },
+  { name: 'lock',       label: 'Security · locked pricing' },
+  { name: 'star',       label: 'Quality · highlight' },
+  { name: 'arrow-up',   label: 'Growth · up-only' },
+  { name: 'arrow-down', label: 'Decrease · reduction' },
+  { name: 'refresh-cw', label: 'Recurring · cycle' },
+  { name: 'percent',    label: 'Discount · commission' },
+  { name: 'at-sign',    label: 'Domain · email' },
+  { name: 'hash',       label: 'Tag · reference' },
+  { name: 'infinity',   label: 'No-ceiling · unlimited' },
+  { name: 'diamond',    label: 'Premium tier' },
+  { name: 'gem',        label: 'Featured · exclusive' },
+  { name: 'hexagon',    label: 'System · structure' },
+  { name: 'sparkles',   label: 'AI · intelligence' },
+  { name: 'triangle',   label: 'Warning · attention' },
+  { name: 'square',     label: 'Default · generic' },
+  { name: 'x',          label: 'Close · dismiss · cross' },
+];
+---
+
+<BaseLayout
+  title="Iconography"
+  description="Lucide icon set, lime-tile pattern, and restraint rules."
+>
+  <PageHeader
+    eyebrow="07 · Foundation"
+    title="Iconography"
+    italicWord="Iconography"
+    lede="One stroke-icon family — Lucide. Set on a lime tile with dark ink. Mono-line, geometric, restrained. Never full-color emoji, never duo-tone libraries, never mixed icon sets."
+  />
+
+  <Section title="The icon tile" kicker="One pattern. Use it everywhere.">
+    <p>
+      The canonical icon is a <strong>38px lime tile</strong> with a dark-ink Lucide glyph centered
+      inside. It reads as a "chip" — visually heavy enough to anchor a benefit card, light enough
+      not to compete with the headline.
+    </p>
+
+    <div class="icon-demo-grid">
+      {iconPalette.slice(0, 9).map((icon) => (
+        <div class="icon-tile">
+          <Icon name={`lucide:${icon.name}`} width={20} height={20} />
+        </div>
+      ))}
+    </div>
+
+    <pre><code>{`---
+import { Icon } from 'astro-icon/components';
+---
+
+<div class="icon-tile">
+  <Icon name="lucide:check" width={20} height={20} />
+</div>
+
+.icon-tile {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  background: var(--gradient-lime);
+  color: var(--color-brand-ink-on-lime);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-icon-tile);
+}`}</code></pre>
+  </Section>
+
+  <Section title="Icon palette" kicker="Curated Lucide set — one per role">
+    <p>
+      Every icon need across product, marketing, and flyers should map to one of the 18 icons below.
+      If a new role emerges, pick from the full <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide library</a> deliberately — don't reach for a different family.
+    </p>
+
+    <div class="palette-grid">
+      {iconPalette.map((icon) => (
+        <div class="palette-cell">
+          <Icon name={`lucide:${icon.name}`} width={28} height={28} class="palette-icon" />
+          <span class="palette-name">{icon.name}</span>
+          <span class="palette-label">{icon.label}</span>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <Section title="Benefit-card pattern" kicker="How the tile lives inside content">
+    <div class="benefit-demo-grid">
+      <article class="benefit-card">
+        <div class="icon-tile benefit-icon">
+          <Icon name="lucide:zap" width={20} height={20} />
+        </div>
+        <h4 class="benefit-card-title">7-day prototype</h4>
+        <p class="benefit-card-body">Working prototype in your hands before any contract is signed. No wasted weeks.</p>
+      </article>
+
+      <article class="benefit-card">
+        <div class="icon-tile benefit-icon">
+          <Icon name="lucide:lock" width={20} height={20} />
+        </div>
+        <h4 class="benefit-card-title">Locked pricing</h4>
+        <p class="benefit-card-body">24 months at 25% off. Price locked against any future rate increase.</p>
+      </article>
+
+      <article class="benefit-card">
+        <div class="icon-tile benefit-icon">
+          <Icon name="lucide:user-check" width={20} height={20} />
+        </div>
+        <h4 class="benefit-card-title">Direct to founder</h4>
+        <p class="benefit-card-body">No account manager in the middle. Every Founding 25 partner has direct access.</p>
+      </article>
+    </div>
+  </Section>
+
+  <Section title="Icon sizing" kicker="Three sizes cover the whole system">
+    <div class="sizing-grid">
+      <div class="sizing-card">
+        <div class="icon-tile icon-tile--sm">
+          <Icon name="lucide:check" width={14} height={14} />
+        </div>
+        <span class="sizing-label">Small · 28px tile / 14px glyph</span>
+        <p class="sizing-note">Inline with list items, compact chips, inline status.</p>
+      </div>
+
+      <div class="sizing-card">
+        <div class="icon-tile">
+          <Icon name="lucide:check" width={20} height={20} />
+        </div>
+        <span class="sizing-label">Default · 38px tile / 20px glyph</span>
+        <p class="sizing-note">Benefit cards, support tiles, feature grids.</p>
+      </div>
+
+      <div class="sizing-card">
+        <div class="icon-tile icon-tile--lg">
+          <Icon name="lucide:check" width={28} height={28} />
+        </div>
+        <span class="sizing-label">Large · 56px tile / 28px glyph</span>
+        <p class="sizing-note">Hero feature callouts, standalone emphasis.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Usage rules">
+    <DoDont
+      dos={[
+        'Use Lucide via astro-icon — <Icon name="lucide:check" width={20} height={20} /> is the standard.',
+        'Set icons on a lime tile with dark ink (--color-brand-ink-on-lime) for benefit roles.',
+        'Pick icons from the curated 18 first; expand from lucide.dev when a new role emerges.',
+        'Match stroke-width to Lucide default (1.5px) — don\'t override.',
+        'Default tile size is 38px with a 20px glyph; use small/large only when needed.',
+      ]}
+      donts={[
+        'Don\'t use emoji anywhere — not in UI, not in testimonial bylines, not inline.',
+        'Don\'t mix icon libraries (Feather, Phosphor, Heroicons) with Lucide.',
+        'Don\'t use duo-tone or multi-color icon variants — stroke-only.',
+        'Don\'t scale icons below 14px or above 32px — rhythm breaks.',
+        'Don\'t animate icon tiles — keep them static.',
+      ]}
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .icon-demo-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: var(--space-6);
+    margin: var(--space-8) 0;
+    padding: var(--space-12) var(--space-14);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    place-items: center;
+  }
+
+  .icon-tile {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    background: var(--gradient-lime);
+    color: var(--color-brand-ink-on-lime);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-icon-tile);
+    flex-shrink: 0;
+  }
+
+  .icon-tile--sm {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-sm);
+  }
+
+  .icon-tile--lg {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-lg);
+  }
+
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .palette-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-10) var(--space-12);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+  }
+
+  .palette-icon {
+    color: var(--color-brand-lime);
+    flex-shrink: 0;
+  }
+
+  .palette-name {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    font-weight: var(--type-weight-semi);
+    color: var(--color-text-strong);
+    display: block;
+  }
+
+  .palette-label {
+    font-size: 11px;
+    color: var(--color-text-mute);
+    letter-spacing: 0.01em;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .palette-cell > :global(svg) + span {
+    flex: 1;
+  }
+
+  .palette-cell > :global(svg) ~ .palette-name,
+  .palette-cell > :global(svg) ~ .palette-label {
+    display: block;
+  }
+
+  .palette-cell {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  .palette-cell > :global(svg) {
+    grid-row: span 2;
+  }
+
+  .benefit-demo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .benefit-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14);
+  }
+
+  .benefit-icon {
+    margin-bottom: var(--space-7);
+  }
+
+  .benefit-card-title {
+    font-size: 15px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: -0.015em;
+    color: var(--color-text-strong);
+    margin-bottom: var(--space-3);
+    line-height: 1.2;
+  }
+
+  .benefit-card-body {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  .sizing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .sizing-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+    padding: var(--space-12) var(--space-14);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    min-height: 180px;
+    justify-content: center;
+  }
+
+  .sizing-label {
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+  }
+
+  .sizing-note {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  @media (max-width: 1000px) {
+    .icon-demo-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+    .palette-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .benefit-demo-grid, .sizing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .icon-demo-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .palette-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

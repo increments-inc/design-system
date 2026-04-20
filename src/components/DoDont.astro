@@ -1,0 +1,129 @@
+---
+/**
+ * DoDont — two-column Do / Don't comparison card.
+ * Left column: green-accented positive rules. Right column: red-accented prohibitions.
+ */
+
+type Props = {
+  dos: string[];
+  donts: string[];
+};
+
+const { dos, donts } = Astro.props;
+---
+
+<div class="dodont-grid">
+  <article class="dodont-card dodont-card--do">
+    <h4 class="dodont-title">
+      <span class="dodont-badge dodont-badge--do" aria-hidden="true">Do</span>
+      <span class="sr-only">Do</span>
+    </h4>
+    <ul class="dodont-list">
+      {dos.map((item) => <li>{item}</li>)}
+    </ul>
+  </article>
+
+  <article class="dodont-card dodont-card--dont">
+    <h4 class="dodont-title">
+      <span class="dodont-badge dodont-badge--dont" aria-hidden="true">Don&apos;t</span>
+      <span class="sr-only">Don&apos;t</span>
+    </h4>
+    <ul class="dodont-list">
+      {donts.map((item) => <li>{item}</li>)}
+    </ul>
+  </article>
+</div>
+
+<style>
+  .dodont-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-9);
+  }
+
+  .dodont-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14) var(--space-14);
+  }
+
+  .dodont-card--do {
+    border-left: 3px solid var(--color-brand-lime);
+    padding-left: calc(var(--space-14) - 3px);
+  }
+
+  .dodont-card--dont {
+    border-left: 3px solid var(--color-state-danger);
+    padding-left: calc(var(--space-14) - 3px);
+  }
+
+  .dodont-title {
+    margin-bottom: var(--space-9);
+  }
+
+  .dodont-badge {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+  }
+
+  .dodont-badge--do {
+    color: var(--color-brand-ink-on-lime);
+    background: var(--color-brand-lime);
+  }
+
+  .dodont-badge--dont {
+    color: var(--color-state-danger);
+    background: transparent;
+    border: 1px solid var(--color-state-danger);
+  }
+
+  .dodont-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .dodont-list li {
+    position: relative;
+    padding-left: 26px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-body);
+    margin-top: 12px;
+  }
+
+  .dodont-list li:first-child {
+    margin-top: 0;
+  }
+
+  .dodont-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  .dodont-card--do .dodont-list li::before {
+    background: var(--color-brand-lime);
+    box-shadow: 0 0 8px rgba(192, 254, 113, 0.45);
+  }
+
+  .dodont-card--dont .dodont-list li::before {
+    background: transparent;
+    border: 1.5px solid var(--color-state-danger);
+  }
+
+  @media (max-width: 760px) {
+    .dodont-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

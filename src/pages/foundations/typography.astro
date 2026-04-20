@@ -1,0 +1,421 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import TokenTable from '../../components/TokenTable.astro';
+import DoDont from '../../components/DoDont.astro';
+import Callout from '../../components/Callout.astro';
+---
+
+<BaseLayout
+  title="Typography"
+  description="Inter + Instrument Serif, the type scale, and the italic-accent headline rule."
+>
+  <PageHeader
+    eyebrow="04 · Foundation"
+    title="Typography"
+    italicWord="Typography"
+    lede="Two families carry the whole system. Inter provides modern sans-serif structure. Instrument Serif adds an editorial italic lift to one word per headline — the visual signature of every Increments surface."
+  />
+
+  <Section title="Families" kicker="Two fonts. Never more.">
+    <div class="family-grid">
+      <article class="family-card">
+        <span class="family-label">Display · Body · UI</span>
+        <h3 class="family-name family-name--inter">Inter</h3>
+        <p class="family-meta">400, 500, 600, 700, 800, 900 · Google Fonts · feature settings <code>cv02 cv03 cv04 cv11</code></p>
+        <p class="family-sample family-sample--inter">
+          <span style="font-weight: 400;">The quick brown fox</span><br/>
+          <span style="font-weight: 600;">The quick brown fox</span><br/>
+          <span style="font-weight: 900;">The quick brown fox</span>
+        </p>
+      </article>
+
+      <article class="family-card">
+        <span class="family-label">Editorial · Italic accent</span>
+        <h3 class="family-name family-name--serif">Instrument Serif</h3>
+        <p class="family-meta">Regular + italic · Google Fonts · used <em>only</em> for 1–2 words per display line</p>
+        <p class="family-sample family-sample--serif">
+          The quick <em>brown fox</em> jumps
+        </p>
+      </article>
+    </div>
+  </Section>
+
+  <Section title="The italic-accent rule" kicker="The brand signature">
+    <Callout variant="note" title="One or two words per display headline — always italic, always lime.">
+      <p>
+        Every hero H1 in the Increments marketing system swaps 1–2 words to Instrument Serif italic in
+        <code>--color-brand-lime</code>. On lime backgrounds, the italic word inverts to <code>--color-brand-forest</code>.
+      </p>
+      <p>
+        This is non-negotiable — it's the visual rhythm that makes the brand recognizable.
+      </p>
+    </Callout>
+
+    <div class="italic-demos">
+      <h2 class="italic-demo">Turn your network into <em>recurring</em> six-figure income.</h2>
+      <h2 class="italic-demo">Run your own agency. Keep the <em>client</em>. Let us deliver.</h2>
+      <h2 class="italic-demo">You built this with us. Now let us build something <em>greater</em>.</h2>
+    </div>
+  </Section>
+
+  <Section title="Type scale" kicker="Point units — screen values">
+    <p>
+      The scale is measured in <strong>points (pt)</strong>, not pixels — print-first. Screen browsers
+      render <code>1pt ≈ 1.333px</code>. Print values are ~20% smaller to preserve visual hierarchy on
+      physical A4 paper.
+    </p>
+
+    <TokenTable
+      columns={[
+        { label: 'Role' },
+        { label: 'Size (pt)' },
+        { label: 'Weight' },
+        { label: 'Tracking' },
+      ]}
+      rows={[
+        ['Hero H1', '38–42', '900', '−0.035em'],
+        ['CTA H1 (on lime)', '34–38', '900', '−0.035em'],
+        ['Section H2', '26–28', '900', '−0.035em'],
+        ['Card H4', '14–18', '800', '−0.02em'],
+        ['Italic eyebrow', '16–17', '400 (italic)', '—'],
+        ['Big number / stat', '40–90', '900', '−0.04em to −0.06em'],
+        ['Tier price', '24–40', '900', '−0.04em'],
+        ['Hero sub / body display', '12', '400', '—'],
+        ['Body / card copy', '9.5–11', '400–500', '—'],
+        ['Benefit title', '10.5–12', '800', '−0.01em'],
+        ['Eyebrow (tracked caps)', '9–10', '700–800', '0.18–0.22em'],
+        ['Badge / tag', '8–8.5', '800', '0.10–0.12em'],
+        ['Muted / meta', '8–9', '400–700', '0.01–0.18em'],
+      ]}
+    />
+  </Section>
+
+  <Section title="Live specimens" kicker="Copy these patterns">
+    <div class="specimen-stack">
+      <div class="specimen">
+        <span class="specimen-label">Hero H1 with italic accent</span>
+        <h1 class="specimen-hero">
+          Custom software at <em>25% off</em>, locked for 24 months.
+        </h1>
+      </div>
+
+      <div class="specimen">
+        <span class="specimen-label">Section H2</span>
+        <h2 class="specimen-h2">How the partnership <em>works</em></h2>
+      </div>
+
+      <div class="specimen">
+        <span class="specimen-label">Italic eyebrow + H3</span>
+        <p class="specimen-eyebrow"><em>For the founders</em></p>
+        <h3 class="specimen-h3">Built by operators, for operators.</h3>
+      </div>
+
+      <div class="specimen">
+        <span class="specimen-label">Big number</span>
+        <p class="specimen-bignumber"><span>25<sup>%</sup></span></p>
+        <p class="specimen-bignumber-sub">Commission on every deal you close</p>
+      </div>
+
+      <div class="specimen">
+        <span class="specimen-label">Eyebrow · caps · tracked</span>
+        <p class="specimen-tracked">10-Year Anniversary Edition · Partner Program</p>
+      </div>
+
+      <div class="specimen">
+        <span class="specimen-label">Body copy</span>
+        <p class="specimen-body">
+          Every surface starts from the tokens. Body copy sits at 72% opacity to create visual
+          hierarchy against 100%-opacity headlines — a small thing that compounds across every paragraph.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Numerics" kicker="Tabular figures on prices">
+    <p>
+      Set <code>font-feature-settings: 'tnum' 1;</code> on any numeric element that needs to line up
+      vertically — prices, tier columns, percentage grids. This keeps <code>$1,000</code> and
+      <code>$9,999</code> aligned in adjacent cells.
+    </p>
+    <div class="numerics-demo">
+      <div class="numerics-card">
+        <span class="numerics-label">Without tabular</span>
+        <ul class="numerics-list numerics-list--normal">
+          <li>$1,000</li>
+          <li>$9,999</li>
+          <li>$12,345</li>
+        </ul>
+      </div>
+      <div class="numerics-card">
+        <span class="numerics-label">With tabular (tnum)</span>
+        <ul class="numerics-list numerics-list--tabular">
+          <li>$1,000</li>
+          <li>$9,999</li>
+          <li>$12,345</li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Usage rules">
+    <DoDont
+      dos={[
+        'Use exactly one italic accent word (or two) per display headline.',
+        'Set font-feature-settings: tnum 1 on every price and numeric grid.',
+        'Anchor offers with a visible strikethrough regular price — never hide it.',
+        'Load Inter with feature settings cv02 cv03 cv04 cv11 — required brand look.',
+        'On lime backgrounds, switch italic-accent color to --color-brand-forest.',
+      ]}
+      donts={[
+        'Don\'t italicize more than 1–2 words per display line.',
+        'Don\'t use Instrument Serif for body copy — it\'s an accent face only.',
+        'Don\'t use pure white for text — always --color-text-strong.',
+        'Don\'t mix in a third font family — two is the whole system.',
+        'Don\'t use uppercase tracked caps for anything other than eyebrows, badges, and meta.',
+      ]}
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .family-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-9);
+    margin-top: var(--space-8);
+  }
+
+  .family-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-14) var(--space-14);
+  }
+
+  .family-label {
+    font-size: 10px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+  }
+
+  .family-name {
+    margin-top: var(--space-5);
+    font-size: 54px;
+    line-height: 1;
+    letter-spacing: -0.035em;
+    color: var(--color-text-strong);
+  }
+
+  .family-name--inter {
+    font-family: var(--font-display);
+    font-weight: var(--type-weight-black);
+  }
+
+  .family-name--serif {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+  }
+
+  .family-meta {
+    margin-top: var(--space-5);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-text-mute);
+  }
+
+  .family-sample {
+    margin-top: var(--space-10);
+    font-size: 24px;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--color-text-strong);
+  }
+
+  .family-sample--serif {
+    font-family: var(--font-editorial);
+  }
+
+  .family-sample--serif em {
+    font-style: italic;
+    color: var(--color-brand-lime);
+  }
+
+  .italic-demos {
+    margin-top: var(--space-12);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  .italic-demo {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3.2vw, 36px);
+    font-weight: var(--type-weight-black);
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    color: var(--color-text-strong);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .italic-demo:last-child { border-bottom: 0; padding-bottom: 0; }
+
+  .italic-demo em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+
+  .specimen-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .specimen {
+    padding: var(--space-10) 0;
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .specimen:last-child { border-bottom: 0; }
+
+  .specimen-label {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+    margin-bottom: var(--space-6);
+  }
+
+  .specimen-hero {
+    font-size: clamp(32px, 4.5vw, 48px);
+    font-weight: var(--type-weight-black);
+    letter-spacing: -0.035em;
+    line-height: 1.04;
+    color: var(--color-text-strong);
+  }
+
+  .specimen-hero em,
+  .specimen-h2 em,
+  .specimen-eyebrow em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+
+  .specimen-h2 {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: var(--type-weight-black);
+    letter-spacing: -0.035em;
+    line-height: 1.06;
+    color: var(--color-text-strong);
+  }
+
+  .specimen-eyebrow {
+    font-family: var(--font-editorial);
+    font-size: 19px;
+    color: var(--color-brand-lime);
+    margin-bottom: 6px;
+  }
+
+  .specimen-eyebrow em { font-style: italic; font-weight: 400; }
+
+  .specimen-h3 {
+    font-size: 22px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: -0.02em;
+    color: var(--color-text-strong);
+  }
+
+  .specimen-bignumber {
+    font-size: 96px;
+    font-weight: var(--type-weight-black);
+    color: var(--color-brand-lime);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .specimen-bignumber sup {
+    font-size: 56px;
+    vertical-align: 38%;
+    margin-left: 4px;
+  }
+
+  .specimen-bignumber-sub {
+    margin-top: var(--space-4);
+    font-size: 13px;
+    color: var(--color-text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: var(--type-weight-bold);
+  }
+
+  .specimen-tracked {
+    font-size: 12px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-mute);
+  }
+
+  .specimen-body {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-text-body);
+    max-width: 68ch;
+  }
+
+  .numerics-demo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-9);
+    margin-top: var(--space-8);
+  }
+
+  .numerics-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14);
+  }
+
+  .numerics-label {
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+  }
+
+  .numerics-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+    font-size: 22px;
+    font-weight: var(--type-weight-heavy);
+    color: var(--color-text-strong);
+    line-height: 1.4;
+  }
+
+  .numerics-list--tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  @media (max-width: 760px) {
+    .family-grid,
+    .numerics-demo {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

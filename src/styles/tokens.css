@@ -1,0 +1,190 @@
+/*
+ * Increments Inc. — Design Tokens
+ * Source of truth for color, typography, spacing, radii, elevation.
+ * Derived from Marketing/design-system.md.
+ *
+ * Naming convention: --{category}-{role}-{variant?}
+ *   e.g. --color-surface-page, --radius-lg, --font-display
+ */
+
+:root {
+  /* ========================================================
+   * 1. COLOR — SURFACES (dark-first, near-black base)
+   * ======================================================== */
+  --color-surface-page:        #09100C;  /* Page background */
+  --color-surface-card:        #0F1F1A;  /* Elevated cards */
+  --color-surface-card-deep:   #122824;  /* Deeper surface (testimonials, featured) */
+  --color-surface-depth:       #0B1815;  /* Background radial depth layer */
+
+  /* ========================================================
+   * 2. COLOR — BRAND
+   * ======================================================== */
+  --color-brand-forest:        #16312C;  /* Deep forest, gradient pair */
+  --color-brand-lime:          #C0FE71;  /* Primary accent — bright lime */
+  --color-brand-lime-light:    #D4FE94;  /* Lighter lime — gradient pair */
+  --color-brand-ink-on-lime:   #09100C;  /* Text color when placed ON lime */
+
+  /* ========================================================
+   * 3. COLOR — TEXT
+   * ======================================================== */
+  --color-text-strong:         #F3FBF4;  /* Headlines & primary text on dark */
+  --color-text-body:           rgba(243, 251, 244, 0.72);  /* Body copy */
+  --color-text-mute:           rgba(243, 251, 244, 0.48);  /* Tertiary / muted */
+  --color-text-faint:          rgba(243, 251, 244, 0.32);  /* Caption / meta */
+
+  /* ========================================================
+   * 4. COLOR — LINES & BORDERS
+   * ======================================================== */
+  --color-hairline-lime:       rgba(192, 254, 113, 0.10);  /* Subtle lime dividers */
+  --color-border-lime:         rgba(192, 254, 113, 0.18);  /* Lime card borders */
+  --color-border-lime-strong:  rgba(192, 254, 113, 0.35);  /* Emphasized borders */
+  --color-border-soft:         rgba(243, 251, 244, 0.08);  /* Neutral low-contrast */
+
+  /* ========================================================
+   * 5. COLOR — STATE (focus, error, success)
+   * ======================================================== */
+  --color-state-focus-ring:    rgba(192, 254, 113, 0.55);
+  --color-state-success:       #6EE7A0;
+  --color-state-warning:       #F5C15E;
+  --color-state-danger:        #F57A7A;
+
+  /* ========================================================
+   * 6. GRADIENTS
+   * ======================================================== */
+  --gradient-lime:    linear-gradient(135deg, #C0FE71 0%, #D4FE94 100%);
+  --gradient-forest:  linear-gradient(135deg, #16312C 0%, #09100C 100%);
+
+  /* ========================================================
+   * 7. TYPOGRAPHY — FAMILIES
+   * ======================================================== */
+  --font-display:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body:      'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-editorial: 'Instrument Serif', Georgia, serif;
+  --font-mono:      'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Inter feature settings (required brand look) */
+  --font-feature-inter: 'cv02', 'cv03', 'cv04', 'cv11';
+
+  /* ========================================================
+   * 8. TYPOGRAPHY — SCALE (screen, in points)
+   * Print scale documented in design-system.md §3.2
+   * ======================================================== */
+  --type-hero-h1:          42pt;   /* Page 1 cover headlines */
+  --type-cta-h1:           38pt;   /* Lime CTA hero */
+  --type-section-h2:       28pt;   /* Section titles */
+  --type-section-h3:       22pt;   /* Subsection titles */
+  --type-card-h4:          18pt;   /* Card titles */
+  --type-eyebrow-italic:   17pt;   /* Instrument Serif above H1 */
+  --type-big-number:       72pt;   /* Commission rates, big stats */
+  --type-display-body:     12pt;   /* Hero supporting paragraph */
+  --type-body:             11pt;   /* Most body copy */
+  --type-body-sm:          10pt;   /* Card copy */
+  --type-caption:          9pt;    /* Eyebrows, meta */
+  --type-badge:            8.5pt;  /* Badges, tags */
+
+  --type-weight-regular:   400;
+  --type-weight-medium:    500;
+  --type-weight-semi:      600;
+  --type-weight-bold:      700;
+  --type-weight-heavy:     800;
+  --type-weight-black:     900;
+
+  --type-tracking-tight:   -0.035em;  /* Display headlines */
+  --type-tracking-normal:  0;
+  --type-tracking-caps:    0.20em;    /* Eyebrows, tracked caps */
+
+  --type-leading-display:  1.04;
+  --type-leading-heading:  1.15;
+  --type-leading-body:     1.55;
+
+  /* ========================================================
+   * 9. SPACING SCALE
+   * ======================================================== */
+  --space-1:   4px;
+  --space-2:   6px;
+  --space-3:   8px;
+  --space-4:   10px;
+  --space-5:   12px;
+  --space-6:   14px;
+  --space-7:   16px;
+  --space-8:   18px;
+  --space-9:   20px;
+  --space-10:  22px;
+  --space-12:  28px;
+  --space-14:  32px;
+  --space-16:  40px;
+  --space-20:  56px;
+  --space-24:  80px;
+  --space-32:  120px;
+
+  /* ========================================================
+   * 10. RADII
+   * ======================================================== */
+  --radius-xs:   6px;    /* Inner list-item bullets */
+  --radius-sm:   10px;   /* Small chips */
+  --radius-md:   12px;   /* Benefit cards, timeline steps */
+  --radius-lg:   14px;   /* Testimonial cards, stat cells */
+  --radius-xl:   16px;   /* Most general cards */
+  --radius-2xl:  18px;   /* Large content cards */
+  --radius-3xl:  22px;   /* CTA hero panel, QR panel */
+  --radius-pill: 999px;  /* Badges, buttons */
+
+  /* ========================================================
+   * 11. ELEVATION / SHADOWS
+   * ======================================================== */
+  --shadow-page-shell:
+    0 24px 80px rgba(0, 0, 0, 0.55);
+
+  --shadow-featured:
+    0 16px 40px rgba(192, 254, 113, 0.35),
+    0 0 0 2px rgba(192, 254, 113, 0.50);
+
+  --shadow-badge:
+    0 6px 18px rgba(0, 0, 0, 0.50),
+    0 0 0 3px rgba(192, 254, 113, 0.18);
+
+  --shadow-cta-panel:
+    0 22px 60px rgba(192, 254, 113, 0.42);
+
+  --shadow-qr-panel:
+    0 18px 44px rgba(9, 16, 12, 0.45),
+    0 0 0 2px rgba(192, 254, 113, 0.35),
+    0 0 0 6px rgba(9, 16, 12, 0.18);
+
+  --shadow-button:
+    0 10px 26px rgba(9, 16, 12, 0.45);
+
+  --shadow-icon-tile:
+    0 2px 10px rgba(192, 254, 113, 0.35);
+
+  --shadow-lime-bar:
+    0 0 10px rgba(192, 254, 113, 0.55);
+
+  /* ========================================================
+   * 12. LAYOUT
+   * ======================================================== */
+  --layout-content-max:  980px;   /* Page content max-width */
+  --layout-sidebar:      280px;   /* Sidebar width */
+  --layout-header:       64px;    /* Top header height */
+
+  /* A4 print (referenced by flyers — not used in docs UI) */
+  --page-width:  8.27in;
+  --page-height: 11.69in;
+
+  /* ========================================================
+   * 13. MOTION
+   * ======================================================== */
+  --motion-fast:     120ms;
+  --motion-default:  200ms;
+  --motion-slow:     320ms;
+  --motion-ease:     cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* ========================================================
+   * 14. Z-INDEX
+   * ======================================================== */
+  --z-base:      1;
+  --z-sticky:    10;
+  --z-sidebar:   20;
+  --z-header:    30;
+  --z-overlay:   100;
+}

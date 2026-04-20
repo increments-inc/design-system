@@ -1,0 +1,220 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Callout from '../../components/Callout.astro';
+import TokenTable from '../../components/TokenTable.astro';
+---
+
+<BaseLayout
+  title="Tokens"
+  description="CSS custom properties and Figma variables — the single source of truth."
+>
+  <PageHeader
+    eyebrow="12 · Foundation"
+    title="Tokens"
+    italicWord="Tokens"
+    lede="Everything in the system is a token. Copy these exports directly into your stylesheet or Figma library — never hardcode a hex or a pixel value. Tokens are the only way the system stays consistent at scale."
+  />
+
+  <Section title="Why tokens" kicker="The reason we don't write raw hex values">
+    <p>
+      A token is a named value. <code>--color-brand-lime</code> always means <code>#C0FE71</code>,
+      everywhere. If we ever tune the lime a shade brighter, every consumer updates in one change —
+      no search-and-replace across dozens of files.
+    </p>
+    <p>
+      Hardcoded values compound. By year two, you have 40 "almost-limes" — all subtly different,
+      all impossible to unify. Tokens prevent that before it starts.
+    </p>
+  </Section>
+
+  <Section title="CSS custom properties" kicker="Paste into any stylesheet">
+    <Callout variant="note" title="Drop-in export">
+      <p>
+        This is the complete <code>:root</code> token set. Copy it into a new stylesheet, import
+        it from <code>src/styles/tokens.css</code>, or wire it via PostCSS. Every component in the
+        system reads from these variables.
+      </p>
+    </Callout>
+
+    <pre class="tokens-pre"><code>{`:root {
+  /* ── Surfaces ───────────────────────────── */
+  --color-surface-page:        #09100C;
+  --color-surface-card:        #0F1F1A;
+  --color-surface-card-deep:   #122824;
+  --color-surface-depth:       #0B1815;
+
+  /* ── Brand ──────────────────────────────── */
+  --color-brand-forest:        #16312C;
+  --color-brand-lime:          #C0FE71;
+  --color-brand-lime-light:    #D4FE94;
+  --color-brand-ink-on-lime:   #09100C;
+
+  /* ── Text ───────────────────────────────── */
+  --color-text-strong:         #F3FBF4;
+  --color-text-body:           rgba(243, 251, 244, 0.72);
+  --color-text-mute:           rgba(243, 251, 244, 0.48);
+  --color-text-faint:          rgba(243, 251, 244, 0.32);
+
+  /* ── Lines & borders ────────────────────── */
+  --color-hairline-lime:       rgba(192, 254, 113, 0.10);
+  --color-border-lime:         rgba(192, 254, 113, 0.18);
+  --color-border-lime-strong:  rgba(192, 254, 113, 0.35);
+  --color-border-soft:         rgba(243, 251, 244, 0.08);
+
+  /* ── State ──────────────────────────────── */
+  --color-state-focus-ring:    rgba(192, 254, 113, 0.55);
+  --color-state-success:       #6EE7A0;
+  --color-state-warning:       #F5C15E;
+  --color-state-danger:        #F57A7A;
+
+  /* ── Gradients ──────────────────────────── */
+  --gradient-lime:    linear-gradient(135deg, #C0FE71 0%, #D4FE94 100%);
+  --gradient-forest:  linear-gradient(135deg, #16312C 0%, #09100C 100%);
+
+  /* ── Fonts ──────────────────────────────── */
+  --font-display:   'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-editorial: 'Instrument Serif', Georgia, serif;
+  --font-mono:      'JetBrains Mono', ui-monospace, monospace;
+
+  /* ── Spacing scale ──────────────────────── */
+  --space-1:   4px;    --space-2:   6px;    --space-3:   8px;
+  --space-4:   10px;   --space-5:   12px;   --space-6:   14px;
+  --space-7:   16px;   --space-8:   18px;   --space-9:   20px;
+  --space-10:  22px;   --space-12:  28px;   --space-14:  32px;
+  --space-16:  40px;   --space-20:  56px;   --space-24:  80px;
+
+  /* ── Radii ──────────────────────────────── */
+  --radius-xs:   6px;
+  --radius-sm:   10px;
+  --radius-md:   12px;
+  --radius-lg:   14px;
+  --radius-xl:   16px;
+  --radius-2xl:  18px;
+  --radius-3xl:  22px;
+  --radius-pill: 999px;
+
+  /* ── Motion ─────────────────────────────── */
+  --motion-fast:     120ms;
+  --motion-default:  200ms;
+  --motion-slow:     320ms;
+  --motion-ease:     cubic-bezier(0.2, 0.8, 0.2, 1);
+}`}</code></pre>
+  </Section>
+
+  <Section title="Figma variable names" kicker="Mirror in your library">
+    <p>
+      When building the Figma library, mirror these tokens with hierarchical names. This keeps the
+      design-to-code handoff exact — designers reference <code>color/brand/lime</code>, engineers
+      use <code>--color-brand-lime</code>, and the values match.
+    </p>
+
+    <TokenTable
+      columns={[
+        { label: 'Figma variable' },
+        { label: 'Value' },
+        { label: 'Collection' },
+      ]}
+      rows={[
+        ['color/surface/page', '#09100C', 'Color'],
+        ['color/surface/card', '#0F1F1A', 'Color'],
+        ['color/surface/card-deep', '#122824', 'Color'],
+        ['color/brand/forest', '#16312C', 'Color'],
+        ['color/brand/lime', '#C0FE71', 'Color'],
+        ['color/brand/lime-light', '#D4FE94', 'Color'],
+        ['color/text/strong', '#F3FBF4', 'Color'],
+        ['color/text/body', 'rgba(243,251,244,0.72)', 'Color'],
+        ['color/text/mute', 'rgba(243,251,244,0.48)', 'Color'],
+        ['color/text/ink-on-lime', '#09100C', 'Color'],
+        ['radius/sm', '10', 'Number'],
+        ['radius/md', '12', 'Number'],
+        ['radius/lg', '14', 'Number'],
+        ['radius/xl', '16', 'Number'],
+        ['radius/2xl', '18', 'Number'],
+        ['radius/3xl', '22', 'Number'],
+        ['radius/pill', '999', 'Number'],
+        ['font/family/display', 'Inter', 'String'],
+        ['font/family/editorial', 'Instrument Serif', 'String'],
+      ]}
+    />
+  </Section>
+
+  <Section title="Naming convention" kicker="Category → role → variant">
+    <p>
+      Every token follows <code>--{`{`}category{`}`}-{`{`}role{`}`}-{`{`}variant?{`}`}</code>. For
+      example:
+    </p>
+    <ul class="name-list">
+      <li><code>--color-brand-lime</code> — category <em>color</em>, role <em>brand</em>, variant <em>lime</em>.</li>
+      <li><code>--space-8</code> — category <em>space</em>, scale position <em>8</em>.</li>
+      <li><code>--radius-xl</code> — category <em>radius</em>, size <em>xl</em>.</li>
+      <li><code>--shadow-cta-panel</code> — category <em>shadow</em>, role <em>cta-panel</em>.</li>
+    </ul>
+    <p>
+      When adding a new token, follow the same pattern. If the role doesn't exist yet, add it
+      deliberately — don't reach for a generic name like <code>--color-accent-2</code>.
+    </p>
+  </Section>
+
+  <Section title="Versioning" kicker="Tokens are stable contracts">
+    <p>
+      Tokens are a <strong>public interface</strong>. Every downstream product, flyer, and email
+      depends on them. Changes follow these rules:
+    </p>
+    <ul class="version-list">
+      <li>
+        <strong>Add</strong> a new token any time a new role emerges — additive changes are safe.
+      </li>
+      <li>
+        <strong>Change</strong> a token's value only after visual-regression review across all
+        surfaces that consume it.
+      </li>
+      <li>
+        <strong>Rename</strong> requires a deprecation window — keep the old name as an alias for one
+        minor version before removing.
+      </li>
+      <li>
+        <strong>Remove</strong> never happens in a patch version — always a minor bump with a
+        migration note.
+      </li>
+    </ul>
+  </Section>
+</BaseLayout>
+
+<style>
+  .tokens-pre {
+    max-height: 620px;
+    overflow-y: auto;
+  }
+
+  .name-list,
+  .version-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-5);
+    max-width: 72ch;
+  }
+
+  .name-list li,
+  .version-list li {
+    position: relative;
+    padding-left: 22px;
+    margin-top: var(--space-5);
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  .name-list li::before,
+  .version-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: var(--color-brand-lime);
+    border-radius: 2px;
+    box-shadow: var(--shadow-icon-tile);
+  }
+</style>

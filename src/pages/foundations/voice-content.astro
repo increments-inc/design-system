@@ -1,0 +1,285 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import TokenTable from '../../components/TokenTable.astro';
+import DoDont from '../../components/DoDont.astro';
+import Callout from '../../components/Callout.astro';
+---
+
+<BaseLayout
+  title="Voice & Content"
+  description="Copy ↔ design alignment, the italic-accent headline rule, and non-negotiable contact conventions."
+>
+  <PageHeader
+    eyebrow="10 · Foundation"
+    title="Voice & Content"
+    italicWord="Content"
+    lede="Copy and design are one system, not two. Every emotional beat in the writing has a visual treatment. Every visual treatment assumes a copy pattern. Honor both."
+  />
+
+  <Section title="Copy ↔ design alignment" kicker="Each signal has a treatment">
+    <p>
+      When a headline carries urgency, a specific lime-pill treatment goes with it. When copy anchors
+      a price, a specific strikethrough style goes with it. These aren't suggestions — they're the
+      system.
+    </p>
+
+    <TokenTable
+      columns={[
+        { label: 'Copy signal' },
+        { label: 'Design treatment' },
+      ]}
+      rows={[
+        ['Deadline / scarcity ("May 20", "25 slots")', 'Lime header tag with pulsing dot'],
+        ['Italic emotional lift ("recurring", "paid")', 'Instrument Serif italic in lime'],
+        ['Risk-reversal ("free audit", "7-day prototype")', 'Benefit card with lime icon tile'],
+        ['Price anchor ("regular price")', 'Strikethrough in muted — never hidden'],
+        ['Authority ("Freeletics", "Abwaab")', 'Quote card with vertical lime bar'],
+        ['Action ("Scan", "Claim", "Reply")', 'Dark pill button on lime CTA panel'],
+        ['Personal / warm ("Dear Founding Client")', 'Letter-block with Instrument Serif greeting'],
+        ['Reference / operational (FAQs, pricing)', 'Dense tables, 2-col Q&A cards'],
+      ]}
+    />
+  </Section>
+
+  <Section title="The italic-accent rule" kicker="One editorial swap per display line">
+    <Callout variant="accent" title="Every hero H1 wears the italic accent. Every time.">
+      <p>
+        One (or at most two) words per display headline swap to Instrument Serif italic in lime. On
+        lime backgrounds, the italic word inverts to forest. This is the brand's visual signature — it
+        appears on every flyer, every landing page, every deck cover.
+      </p>
+    </Callout>
+
+    <p>Canonical examples — study the rhythm:</p>
+    <ul class="canon-list">
+      <li>Custom software at <em>25% off</em>, locked for 24 months.</li>
+      <li>Turn your network into <em>recurring</em> six-figure income.</li>
+      <li>Know someone who needs software? Get <em>paid</em> for the introduction.</li>
+      <li>Run your own agency. Keep the <em>client</em>. Let us deliver.</li>
+      <li>Become the face of a <em>global</em> studio in your country.</li>
+      <li>You close deals. We deliver. <em>Up to 25%</em> commission. No ceiling.</li>
+      <li>You built this with us. Now let us build something <em>greater</em> — together.</li>
+    </ul>
+  </Section>
+
+  <Section title="Contact footer — non-negotiable format" kicker="Public marketing collateral">
+    <Callout variant="note" title="Exact string — memorize it:">
+      <p class="canonical-footer">
+        MSI Shamim · Founder &amp; CEO · incrementsinc.com · ceo@incrementsinc.com
+      </p>
+    </Callout>
+
+    <TokenTable
+      columns={[
+        { label: 'Rule' },
+        { label: 'Why' },
+      ]}
+      rows={[
+        ['Use "MSI Shamim"', 'On public marketing, never "Md. Shafiqul Islam (MSI)".'],
+        ['Use ceo@incrementsinc.com', 'Public inbox; never the personal msi.shamim@ address.'],
+        ['No comma after "Founder & CEO"', 'Lime-dot separator handles punctuation.'],
+        ['Four-part pattern', 'Name · Role · Domain · Email. In that order. Every time.'],
+        ['Dot separator color', 'rgba(192, 254, 113, 0.7) · 3×3px dot.'],
+      ]}
+    />
+  </Section>
+
+  <Section title="Cover-page band format" kicker="Above the fold, below the hero">
+    <Callout variant="note">
+      <p class="canonical-band">10-Year Anniversary Edition · Partner Program</p>
+    </Callout>
+
+    <ul class="plain-list">
+      <li><strong>Do not</strong> prefix with "Increments Inc." — the logo already represents the brand.</li>
+      <li>Tracked uppercase, <code>letter-spacing: 0.18em</code>, 9pt, muted color, top hairline border.</li>
+      <li>Lime dot between the two halves.</li>
+      <li>Edition label + program name is the whole content — no more.</li>
+    </ul>
+  </Section>
+
+  <Section title="QR label format" kicker="Below every QR panel">
+    <div class="qr-label-demo">calendly.com/increments-inc/<span>founding-25</span></div>
+
+    <ul class="plain-list">
+      <li><strong>Do not</strong> prepend <code>https://</code>.</li>
+      <li>Slug wrapped in <code>&lt;span&gt;</code> and highlighted white; domain stays lime.</li>
+      <li>Monospace or body font — never italic.</li>
+    </ul>
+  </Section>
+
+  <Section title="Voice dimensions" kicker="How Increments sounds">
+    <div class="voice-grid">
+      <div class="voice-card">
+        <span class="voice-label">Voice</span>
+        <h3>Confident, direct, specific</h3>
+        <p>State what we do. Back it with a number. Never hedge.</p>
+      </div>
+      <div class="voice-card">
+        <span class="voice-label">Sentence shape</span>
+        <h3>Short declaratives</h3>
+        <p>"We ship in 7 days." beats "We aim to ship quickly (usually within a week)."</p>
+      </div>
+      <div class="voice-card">
+        <span class="voice-label">Numbers</span>
+        <h3>Always concrete</h3>
+        <p>"25% off" beats "significant savings." "24 months" beats "an extended period."</p>
+      </div>
+      <div class="voice-card">
+        <span class="voice-label">Warmth</span>
+        <h3>Peer-to-peer, never corporate</h3>
+        <p>"Dear Founding Client" beats "Dear Valued Customer." We write like humans.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Usage rules">
+    <DoDont
+      dos={[
+        'Swap 1–2 words per display H1 to Instrument Serif italic lime.',
+        'Use the exact footer format — name · role · domain · email.',
+        'Use ceo@incrementsinc.com on public collateral (not the personal inbox).',
+        'Pair every copy signal with its defined design treatment.',
+        'Anchor every price offer with a visible strikethrough regular price.',
+      ]}
+      donts={[
+        'Don\'t italicize more than 2 words in a display headline.',
+        'Don\'t prefix cover bands with "Increments Inc." — logo handles brand.',
+        'Don\'t include https:// in QR labels.',
+        'Don\'t hide or delete a regular price — always strikethrough it.',
+        'Don\'t use "Md. Shafiqul Islam (MSI)" on public marketing — use MSI Shamim.',
+      ]}
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .canon-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-8);
+    max-width: 70ch;
+  }
+
+  .canon-list li {
+    padding: var(--space-6) 0;
+    font-size: 17px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: -0.015em;
+    line-height: 1.42;
+    color: var(--color-text-strong);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .canon-list li:last-child { border-bottom: 0; }
+
+  .canon-list em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+
+  .canonical-footer {
+    font-size: 16px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: -0.01em;
+    color: var(--color-text-strong);
+  }
+
+  .canonical-band {
+    font-size: 11px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-text-mute);
+  }
+
+  .plain-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+  }
+
+  .plain-list li {
+    position: relative;
+    padding-left: 18px;
+    margin-top: var(--space-4);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  .plain-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 6px;
+    height: 6px;
+    background: var(--color-brand-lime);
+    border-radius: 50%;
+  }
+
+  .qr-label-demo {
+    margin-top: var(--space-7);
+    padding: var(--space-12) var(--space-14);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-lime);
+    border-radius: var(--radius-xl);
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--color-brand-lime);
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
+
+  .qr-label-demo span {
+    color: var(--color-text-strong);
+  }
+
+  .voice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .voice-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14);
+  }
+
+  .voice-label {
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+  }
+
+  .voice-card h3 {
+    margin-top: var(--space-4);
+    font-size: 18px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    color: var(--color-text-strong);
+  }
+
+  .voice-card p {
+    margin-top: var(--space-4);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  @media (max-width: 720px) {
+    .voice-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

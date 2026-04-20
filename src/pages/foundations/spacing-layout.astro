@@ -1,0 +1,249 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import TokenTable from '../../components/TokenTable.astro';
+import DoDont from '../../components/DoDont.astro';
+
+const spacingScale = [
+  { token: '--space-1', value: '4px', use: 'Tight inline spacing · icon-to-label' },
+  { token: '--space-2', value: '6px', use: 'Badge padding · micro gaps' },
+  { token: '--space-3', value: '8px', use: 'Compact row gaps' },
+  { token: '--space-4', value: '10px', use: 'Stats-strip gap · benefit-row gap' },
+  { token: '--space-5', value: '12px', use: 'Default inter-item gap inside cards' },
+  { token: '--space-6', value: '14px', use: 'Default card inner gap' },
+  { token: '--space-7', value: '16px', use: 'Standard content padding' },
+  { token: '--space-8', value: '18px', use: 'Benefit-card padding · hero button' },
+  { token: '--space-9', value: '20px', use: 'Section inner padding' },
+  { token: '--space-10', value: '22px', use: 'Wide card padding' },
+  { token: '--space-12', value: '28px', use: 'Large callout padding' },
+  { token: '--space-14', value: '32px', use: 'CTA hero panel padding' },
+  { token: '--space-16', value: '40px', use: 'Page-section rhythm' },
+  { token: '--space-20', value: '56px', use: 'Top-level page margin' },
+  { token: '--space-24', value: '80px', use: 'Hero top padding' },
+  { token: '--space-32', value: '120px', use: 'Full-bleed section breaks' },
+];
+---
+
+<BaseLayout
+  title="Spacing & Layout"
+  description="Spacing scale, grid patterns, breakpoints, and the A4 print canvas."
+>
+  <PageHeader
+    eyebrow="05 · Foundation"
+    title="Spacing & Layout"
+    italicWord="Layout"
+    lede="A consistent rhythm from 4px to 120px. Cards breathe. Sections have room. Density signals cheap; whitespace signals expensive. The whole system is tuned for luxury, not packed."
+  />
+
+  <Section title="Spacing scale" kicker="16 steps from tight to architectural">
+    <p>
+      Every gap, padding, and margin in the system maps to one of these tokens. Avoid arbitrary pixel
+      values — they accumulate drift until surfaces feel misaligned.
+    </p>
+
+    <div class="spacing-visual">
+      {spacingScale.map((step) => (
+        <div class="spacing-row">
+          <div class="spacing-swatch" style={`width: ${step.value};`}></div>
+          <code class="spacing-token">{step.token}</code>
+          <span class="spacing-value">{step.value}</span>
+          <span class="spacing-use">{step.use}</span>
+        </div>
+      ))}
+    </div>
+  </Section>
+
+  <Section title="Rules of thumb" kicker="When to reach for what">
+    <TokenTable
+      columns={[
+        { label: 'Context' },
+        { label: 'Use' },
+      ]}
+      rows={[
+        ['Default gap inside cards', '--space-5 (12px) or --space-6 (14px)'],
+        ['Wide callouts', '--space-8 to --space-10 (18–22px)'],
+        ['CTA panels, hero cards', '--space-12 to --space-14 (28–32px)'],
+        ['Section vertical rhythm', '--space-16 (40px)'],
+        ['Page-level top margin', '--space-20 (56px) to --space-24 (80px)'],
+        ['Inline list-item bullets', '--space-1 to --space-3 (4–8px)'],
+      ]}
+    />
+  </Section>
+
+  <Section title="Breakpoints" kicker="Screen-first grid — print is separate">
+    <TokenTable
+      columns={[
+        { label: 'Range' },
+        { label: 'Behavior' },
+      ]}
+      rows={[
+        ['< 560px', 'Mobile — single column, full-width cards, sidebar collapses.'],
+        ['560–900px', 'Tablet — 2-column grids, compact spacing, sidebar above content.'],
+        ['900–1200px', 'Desktop — 3-column grids, sidebar sticky-left.'],
+        ['> 1200px', 'Wide — content caps at 980px for readability; sidebar sticky-left.'],
+      ]}
+    />
+    <p>
+      Content max-width is <code>var(--layout-content-max)</code> = <strong>980px</strong>. Even on
+      ultra-wide monitors, text never stretches beyond a comfortable reading measure.
+    </p>
+  </Section>
+
+  <Section title="Common grid patterns" kicker="Reuse, don't reinvent">
+    <div class="grid-patterns">
+      <div class="pattern">
+        <span class="pattern-label">3-tier pricing row</span>
+        <code class="pattern-code">grid-template-columns: 1fr 1.08fr 1fr</code>
+        <p class="pattern-note">Featured middle card is 8% wider to draw the eye.</p>
+      </div>
+      <div class="pattern">
+        <span class="pattern-label">Benefits grid</span>
+        <code class="pattern-code">grid-template-columns: 1fr 1fr · gap: 14px 20px</code>
+        <p class="pattern-note">Two columns, row gap tighter than column gap.</p>
+      </div>
+      <div class="pattern">
+        <span class="pattern-label">Stats strip (cover)</span>
+        <code class="pattern-code">grid-template-columns: repeat(4, 1fr) · gap: 10px</code>
+        <p class="pattern-note">Four equal columns, tight gaps — looks like a data strip.</p>
+      </div>
+      <div class="pattern">
+        <span class="pattern-label">Service grid</span>
+        <code class="pattern-code">2×3 or 3×2 cards</code>
+        <p class="pattern-note">For capability/feature matrices.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Print canvas" kicker="A4 portrait in inches — for marketing collateral">
+    <p>
+      Marketing flyers, playbooks, and decks are print-first. The canvas is A4 portrait:
+      <strong>8.27in × 11.69in</strong>. Outer padding is <code>0.63in</code> on sides (screen) or
+      <code>0.55in</code> (print).
+    </p>
+    <p>
+      Product UI never uses the print canvas — only marketing collateral does. The full print-safety
+      recipe (11 rules) lives in the marketing handbook at <code>Marketing/design-system.md §9</code>.
+    </p>
+  </Section>
+
+  <Section title="Usage rules">
+    <DoDont
+      dos={[
+        'Reach for --space tokens — never type arbitrary pixel values.',
+        'Let sections breathe: --space-16 vertical rhythm is the baseline.',
+        'Cap content width at --layout-content-max (980px) for readability.',
+        'Use --space-5 or --space-6 as the default gap inside any new card.',
+        'For the 3-column pricing row, keep the featured middle 8% wider.',
+      ]}
+      donts={[
+        'Don\'t chain arbitrary magic numbers like 13px, 17px, 23px — they drift.',
+        'Don\'t collapse gaps below --space-3 — below 8px feels cramped.',
+        'Don\'t stretch content beyond 980px — even on wide monitors.',
+        'Don\'t mix mm and inches in print contexts — pick inches, stay there.',
+        'Don\'t invent new grid templates when one of the four standards fits.',
+      ]}
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .spacing-visual {
+    margin-top: var(--space-8);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-11) var(--space-14);
+  }
+
+  .spacing-row {
+    display: grid;
+    grid-template-columns: 140px 160px 60px 1fr;
+    align-items: center;
+    gap: var(--space-8);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .spacing-row:last-child { border-bottom: 0; }
+
+  .spacing-swatch {
+    height: 14px;
+    background: var(--color-brand-lime);
+    border-radius: 2px;
+    box-shadow: var(--shadow-icon-tile);
+  }
+
+  .spacing-token {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--color-brand-lime);
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+
+  .spacing-value {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-mute);
+  }
+
+  .spacing-use {
+    font-size: 13px;
+    color: var(--color-text-body);
+  }
+
+  .grid-patterns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-9);
+    margin-top: var(--space-8);
+  }
+
+  .pattern {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14);
+  }
+
+  .pattern-label {
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+  }
+
+  .pattern-code {
+    display: block;
+    margin-top: var(--space-5);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--color-text-strong);
+    background: rgba(192, 254, 113, 0.06);
+    border: 1px solid var(--color-hairline-lime);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+  }
+
+  .pattern-note {
+    margin-top: var(--space-5);
+    font-size: 13px;
+    color: var(--color-text-body);
+  }
+
+  @media (max-width: 720px) {
+    .spacing-row {
+      grid-template-columns: 120px 1fr;
+      gap: var(--space-5);
+    }
+    .spacing-value, .spacing-use {
+      grid-column: 1 / -1;
+    }
+    .grid-patterns {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

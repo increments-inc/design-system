@@ -1,0 +1,66 @@
+---
+/**
+ * Section — a titled block inside a foundation page.
+ * Use for each major subsection (e.g. "Core tokens", "Gradients", "Usage rules").
+ */
+
+type Props = {
+  title: string;
+  kicker?: string;
+  id?: string;
+  description?: string;
+};
+
+const { title, kicker, id, description } = Astro.props;
+---
+
+<section class="ds-section" id={id}>
+  <div class="ds-section-head">
+    {kicker && <span class="ds-section-kicker">{kicker}</span>}
+    <h2 class="ds-section-title">{title}</h2>
+    {description && <p class="ds-section-description">{description}</p>}
+  </div>
+  <div class="ds-section-body">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .ds-section {
+    margin-top: var(--space-16);
+  }
+
+  .ds-section + .ds-section {
+    margin-top: var(--space-20);
+  }
+
+  .ds-section-head {
+    margin-bottom: var(--space-10);
+  }
+
+  .ds-section-kicker {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: var(--type-tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+    margin-bottom: var(--space-3);
+  }
+
+  .ds-section-title {
+    font-size: 26px;
+    font-weight: var(--type-weight-black);
+    letter-spacing: var(--type-tracking-tight);
+    line-height: 1.1;
+    color: var(--color-text-strong);
+  }
+
+  .ds-section-description {
+    margin-top: var(--space-5);
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+    max-width: 68ch;
+  }
+</style>

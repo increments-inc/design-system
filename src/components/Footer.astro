@@ -1,0 +1,81 @@
+---
+/**
+ * Site footer — contact line per the non-negotiable format in design-system.md §10.2.
+ * Format: MSI Shamim · Founder & CEO · incrementsinc.com · ceo@incrementsinc.com
+ */
+---
+
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <p class="site-footer-line">
+      <span class="site-footer-name">MSI Shamim</span>
+      <span class="site-footer-sep" aria-hidden="true"></span>
+      <span>Founder &amp; CEO</span>
+      <span class="site-footer-sep" aria-hidden="true"></span>
+      <a href="https://incrementsinc.com" class="site-footer-link">incrementsinc.com</a>
+      <span class="site-footer-sep" aria-hidden="true"></span>
+      <a href="mailto:ceo@incrementsinc.com" class="site-footer-link">ceo@incrementsinc.com</a>
+    </p>
+    <p class="site-footer-meta">
+      &copy; {new Date().getFullYear()} Increments Inc. · Design System v0.1
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: var(--space-24);
+    padding: var(--space-14) var(--space-14);
+    border-top: 1px solid var(--color-border-soft);
+  }
+
+  .site-footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-5);
+    text-align: center;
+  }
+
+  .site-footer-line {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--color-text-mute);
+    max-width: 100%;
+  }
+
+  .site-footer-name {
+    font-weight: var(--type-weight-bold);
+    color: var(--color-text-strong);
+  }
+
+  .site-footer-sep {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--color-brand-lime);
+    opacity: 0.7;
+    display: inline-block;
+  }
+
+  .site-footer-link {
+    color: var(--color-text-body);
+    border-bottom-color: transparent;
+  }
+
+  .site-footer-link:hover {
+    color: var(--color-brand-lime);
+    border-bottom-color: var(--color-brand-lime);
+  }
+
+  .site-footer-meta {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-faint);
+  }
+</style>

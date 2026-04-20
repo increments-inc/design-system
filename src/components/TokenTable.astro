@@ -1,0 +1,102 @@
+---
+/**
+ * TokenTable — dense reference table for displaying rows of token name / value / role.
+ * Used for typography scale, radii, shadows, spacing, etc.
+ */
+
+type Column = {
+  label: string;
+  align?: 'left' | 'right' | 'center';
+};
+
+type Row = (string | { text: string; mono?: boolean; accent?: boolean })[];
+
+type Props = {
+  columns: Column[];
+  rows: Row[];
+};
+
+const { columns, rows } = Astro.props;
+---
+
+<div class="token-table-wrap">
+  <table class="token-table">
+    <thead>
+      <tr>
+        {columns.map((col) => (
+          <th style={`text-align: ${col.align ?? 'left'}`}>{col.label}</th>
+        ))}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          {row.map((cell, idx) => {
+            const align = columns[idx]?.align ?? 'left';
+            const isObj = typeof cell === 'object';
+            const text = isObj ? cell.text : cell;
+            const mono = isObj && cell.mono;
+            const accent = isObj && cell.accent;
+            return (
+              <td
+                style={`text-align: ${align}`}
+                class={`${mono ? 'is-mono' : ''} ${accent ? 'is-accent' : ''}`}
+              >
+                {text}
+              </td>
+            );
+          })}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .token-table-wrap {
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--color-surface-card);
+  }
+
+  .token-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+
+  .token-table th {
+    text-align: left;
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-mute);
+    padding: var(--space-8) var(--space-12);
+    background: rgba(192, 254, 113, 0.04);
+    border-bottom: 1px solid var(--color-border-soft);
+  }
+
+  .token-table td {
+    padding: var(--space-7) var(--space-12);
+    border-bottom: 1px solid var(--color-border-soft);
+    color: var(--color-text-body);
+    vertical-align: middle;
+  }
+
+  .token-table tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .token-table .is-mono {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--color-text-strong);
+  }
+
+  .token-table .is-accent {
+    color: var(--color-brand-lime);
+    font-weight: var(--type-weight-semi);
+  }
+</style>

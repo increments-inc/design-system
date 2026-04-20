@@ -1,0 +1,300 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import DoDont from '../../components/DoDont.astro';
+import Callout from '../../components/Callout.astro';
+
+const radii = [
+  { token: '--radius-xs', value: '6px', use: 'Inner list-item square bullets' },
+  { token: '--radius-sm', value: '10px', use: 'Small chips, inline pills' },
+  { token: '--radius-md', value: '12px', use: 'Benefit cards, timeline steps' },
+  { token: '--radius-lg', value: '14px', use: 'Testimonial cards, stat cells' },
+  { token: '--radius-xl', value: '16px', use: 'Most general cards (default)' },
+  { token: '--radius-2xl', value: '18px', use: 'Large content cards, rates tables' },
+  { token: '--radius-3xl', value: '22px', use: 'CTA hero panel, QR panel' },
+  { token: '--radius-pill', value: '999px', use: 'Badges, tags, buttons' },
+];
+
+const shadows = [
+  {
+    token: '--shadow-page-shell',
+    use: 'Floats the entire flyer shell above the viewport in marketing previews.',
+    tint: 'dark',
+  },
+  {
+    token: '--shadow-featured',
+    use: 'Featured tier card: lime glow + inner lime ring.',
+    tint: 'lime',
+  },
+  {
+    token: '--shadow-badge',
+    use: 'Badge sitting above a featured card.',
+    tint: 'dark-lime',
+  },
+  {
+    token: '--shadow-cta-panel',
+    use: 'Heaviest lime glow — reserved for the final CTA panel.',
+    tint: 'lime-strong',
+  },
+  {
+    token: '--shadow-qr-panel',
+    use: 'Stacked dark + lime halo around the QR panel.',
+    tint: 'halo',
+  },
+  {
+    token: '--shadow-button',
+    use: 'Dark lift for buttons — adds weight without lime glow.',
+    tint: 'dark',
+  },
+  {
+    token: '--shadow-icon-tile',
+    use: 'Subtle lime glow under the lime-tile benefit icons.',
+    tint: 'lime-soft',
+  },
+];
+---
+
+<BaseLayout
+  title="Radii & Elevation"
+  description="Radius tokens by role and the lime-tinted shadow system."
+>
+  <PageHeader
+    eyebrow="06 · Foundation"
+    title="Radii & Elevation"
+    italicWord="Elevation"
+    lede="Radii are assigned by role, not taste. Shadows are tinted toward surface color or toward lime — never pure black. Together they give every card a sense of weight and hierarchy without photographic realism."
+  />
+
+  <Section title="Radius scale" kicker="Pick by component role, not by visual preference">
+    <div class="radius-grid">
+      {radii.map((r) => (
+        <article class="radius-card">
+          <div class="radius-chip" style={`border-radius: ${r.value};`}></div>
+          <code class="radius-token">{r.token}</code>
+          <span class="radius-value">{r.value}</span>
+          <p class="radius-use">{r.use}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section title="Elevation system" kicker="Never pure black — tint toward surface or lime">
+    <p>
+      Shadows are never <code>rgba(0, 0, 0, X)</code> on a dark theme — they create a dead visual hole.
+      Instead, shadows are tinted dark-green (<code>rgba(9, 16, 12, X)</code>) for dark lift, or lime
+      (<code>rgba(192, 254, 113, X)</code>) for accent glow.
+    </p>
+
+    <div class="shadow-grid">
+      {shadows.map((s) => (
+        <article class={`shadow-card shadow-card--${s.tint}`}>
+          <code class="shadow-token">{s.token}</code>
+          <p class="shadow-use">{s.use}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section title="Lifted featured elements" kicker="The signature vertical rhythm">
+    <Callout variant="note" title="Translate featured cards -6px on screen, reset in print">
+      <p>
+        The featured middle card in a 3-tier pricing row is lifted <code>transform: translateY(-6px)</code>
+        on screen. In <code>@media print</code>, transforms must be reset to <code>none</code> — they
+        cause clipping in PDF export.
+      </p>
+    </Callout>
+
+    <div class="lift-demo">
+      <div class="lift-card">Standard</div>
+      <div class="lift-card lift-card--featured">Featured <span class="lift-badge">Most Popular</span></div>
+      <div class="lift-card">Standard</div>
+    </div>
+  </Section>
+
+  <Section title="Usage rules">
+    <DoDont
+      dos={[
+        'Match radius to component role — use --radius-xl as the default for new cards.',
+        'Use --radius-pill (999px) for any badge, tag, or button.',
+        'Tint dark shadows with rgba(9, 16, 12, X) — never rgba(0, 0, 0, X).',
+        'Use --shadow-featured only on one card per viewport.',
+        'Reset transform: none inside @media print when using translateY lifts.',
+      ]}
+      donts={[
+        'Don\'t pick a radius because it "looks nicer" — pick by role from the token list.',
+        'Don\'t apply --shadow-cta-panel to anything that isn\'t a final CTA.',
+        'Don\'t stack multiple lime shadows on the same element — it muddies the glow.',
+        'Don\'t use pure-black shadows on a dark theme.',
+        'Don\'t animate shadows — keep the system visually still (see Motion).',
+      ]}
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .radius-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .radius-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-md);
+    padding: var(--space-12) var(--space-14) var(--space-14);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+  }
+
+  .radius-chip {
+    width: 72px;
+    height: 72px;
+    background: var(--gradient-lime);
+    box-shadow: var(--shadow-icon-tile);
+  }
+
+  .radius-token {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--color-brand-lime);
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+
+  .radius-value {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-mute);
+  }
+
+  .radius-use {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--color-text-body);
+  }
+
+  .shadow-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    margin-top: var(--space-10);
+    padding: var(--space-14) var(--space-12);
+    background:
+      radial-gradient(circle at 80% -10%, rgba(192, 254, 113, 0.08), rgba(192, 254, 113, 0) 55%),
+      var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-2xl);
+  }
+
+  .shadow-card {
+    background: var(--color-surface-card-deep);
+    border: 1px solid var(--color-border-lime);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14);
+    min-height: 110px;
+  }
+
+  .shadow-card--dark         { box-shadow: var(--shadow-page-shell); }
+  .shadow-card--lime         { box-shadow: var(--shadow-featured); border-color: transparent; background: var(--gradient-lime); color: var(--color-brand-ink-on-lime); }
+  .shadow-card--dark-lime    { box-shadow: var(--shadow-badge); }
+  .shadow-card--lime-strong  { box-shadow: var(--shadow-cta-panel); background: var(--gradient-lime); color: var(--color-brand-ink-on-lime); border-color: transparent; }
+  .shadow-card--halo         { box-shadow: var(--shadow-qr-panel); }
+  .shadow-card--lime-soft    { box-shadow: var(--shadow-icon-tile); }
+
+  .shadow-token {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-brand-lime);
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+
+  .shadow-card--lime .shadow-token,
+  .shadow-card--lime-strong .shadow-token {
+    color: var(--color-brand-forest);
+  }
+
+  .shadow-use {
+    margin-top: var(--space-5);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  .shadow-card--lime .shadow-use,
+  .shadow-card--lime-strong .shadow-use {
+    color: rgba(9, 16, 12, 0.78);
+  }
+
+  .lift-demo {
+    display: grid;
+    grid-template-columns: 1fr 1.08fr 1fr;
+    gap: var(--space-7);
+    margin-top: var(--space-10);
+    padding: var(--space-14) var(--space-12) var(--space-16);
+    background: var(--color-surface-card-deep);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-2xl);
+    align-items: stretch;
+  }
+
+  .lift-card {
+    background: var(--color-surface-card);
+    border: 1.5px solid var(--color-border-lime);
+    border-radius: var(--radius-xl);
+    padding: var(--space-14) var(--space-12);
+    text-align: center;
+    font-weight: var(--type-weight-heavy);
+    color: var(--color-text-body);
+  }
+
+  .lift-card--featured {
+    position: relative;
+    background: var(--gradient-lime);
+    color: var(--color-brand-ink-on-lime);
+    border: 0;
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-featured);
+  }
+
+  .lift-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-brand-ink-on-lime);
+    color: var(--color-brand-lime);
+    font-size: 9px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 900px) {
+    .radius-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .shadow-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .radius-grid {
+      grid-template-columns: 1fr;
+    }
+    .lift-demo {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

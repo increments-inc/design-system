@@ -1,0 +1,154 @@
+---
+/**
+ * Sidebar navigation — lists every foundations page plus placeholder groups
+ * for Components and Patterns (coming soon).
+ */
+
+import { navigationGroups } from '../data/navigation';
+
+const currentPath = Astro.url.pathname;
+
+/**
+ * Normalize a path for comparison — strip trailing slashes so "/foo/" and
+ * "/foo" match.
+ */
+function normalize(path: string): string {
+  if (path === '/') return '/';
+  return path.replace(/\/+$/, '');
+}
+
+const normalizedCurrent = normalize(currentPath);
+---
+
+<aside class="sidebar">
+  <nav aria-label="Design system navigation">
+    {navigationGroups.map((group) => (
+      <section class="sidebar-group">
+        <h3 class="sidebar-group-label">{group.label}</h3>
+        <ul class="sidebar-list">
+          {group.items.map((item) => {
+            const isActive = item.status === 'ready' && normalize(item.href) === normalizedCurrent;
+            const isSoon = item.status === 'soon';
+            return (
+              <li>
+                <a
+                  href={item.href}
+                  class={`sidebar-link ${isActive ? 'is-active' : ''} ${isSoon ? 'is-soon' : ''}`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <span>{item.label}</span>
+                  {isSoon && <span class="sidebar-pill">soon</span>}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))}
+  </nav>
+</aside>
+
+<style>
+  .sidebar {
+    position: sticky;
+    top: var(--layout-header);
+    width: var(--layout-sidebar);
+    height: calc(100vh - var(--layout-header));
+    padding: var(--space-12) var(--space-10) var(--space-12) var(--space-14);
+    border-right: 1px solid var(--color-border-soft);
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+
+  .sidebar-group + .sidebar-group {
+    margin-top: var(--space-12);
+  }
+
+  .sidebar-group-label {
+    font-size: var(--type-caption);
+    font-weight: var(--type-weight-bold);
+    letter-spacing: var(--type-tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+    margin-bottom: var(--space-6);
+  }
+
+  .sidebar-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .sidebar-list li {
+    margin-top: 0;
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    margin: 2px -10px;
+    font-size: 13.5px;
+    font-weight: var(--type-weight-medium);
+    color: var(--color-text-body);
+    border: none;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: background var(--motion-default) var(--motion-ease),
+      color var(--motion-default) var(--motion-ease);
+  }
+
+  .sidebar-link:hover {
+    background: rgba(192, 254, 113, 0.06);
+    color: var(--color-text-strong);
+    border: none;
+  }
+
+  .sidebar-link.is-active {
+    background: rgba(192, 254, 113, 0.10);
+    color: var(--color-brand-lime);
+    font-weight: var(--type-weight-semi);
+    position: relative;
+  }
+
+  .sidebar-link.is-active::before {
+    content: '';
+    position: absolute;
+    left: -14px;
+    top: 50%;
+    width: 3px;
+    height: 16px;
+    background: var(--color-brand-lime);
+    border-radius: 2px;
+    transform: translateY(-50%);
+    box-shadow: var(--shadow-lime-bar);
+  }
+
+  .sidebar-link.is-soon {
+    color: var(--color-text-faint);
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .sidebar-pill {
+    font-size: 9.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-mute);
+    padding: 2px 6px;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-pill);
+  }
+
+  @media (max-width: 900px) {
+    .sidebar {
+      position: static;
+      width: 100%;
+      height: auto;
+      padding: var(--space-9) var(--space-10);
+      border-right: none;
+      border-bottom: 1px solid var(--color-border-soft);
+    }
+  }
+</style>
