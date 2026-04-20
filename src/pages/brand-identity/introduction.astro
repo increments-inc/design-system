@@ -1,0 +1,187 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Callout from '../../components/Callout.astro';
+---
+
+<BaseLayout
+  title="Brand Identity · Introduction"
+  description="What the Brand Identity layer is, who it's for, and how it sits above Brand Foundations."
+>
+  <PageHeader
+    eyebrow="Brand Identity · 01"
+    title="Introduction"
+    italicWord="Introduction"
+    lede="Foundations answer how the brand looks. Identity answers who the brand is, how it speaks, and where it shows up. Eighteen pages that let anyone on the team represent Increments in public without guessing."
+  />
+
+  <Section title="What this layer is">
+    <p>
+      The <strong>Brand Identity</strong> layer sits directly above <a href="/foundations/introduction/">Brand Foundations</a>. Foundations gave you the tokens,
+      the typography, the logo rules — the machinery of how we look. Identity
+      gives you the machinery of who we are: our story, our mission, our voice in depth,
+      our audiences, our platform playbooks.
+    </p>
+    <p>
+      Every time a team member writes a LinkedIn post, drafts a partner email,
+      prepares a sales deck, or replies to a press inquiry — they shouldn't have
+      to re-invent how Increments sounds or who we serve. That's what these
+      pages are for.
+    </p>
+  </Section>
+
+  <Section title="The four sub-sections">
+    <div class="section-grid">
+      <article class="section-card">
+        <div class="section-card-icon"><Icon name="lucide:compass" width={22} height={22} /></div>
+        <span class="section-card-kicker">A · 5 pages</span>
+        <h3>Brand Strategy</h3>
+        <p>The <em>who / what / why</em>. Story, mission, vision, values, positioning, and the audiences we exist for.</p>
+      </article>
+
+      <article class="section-card">
+        <div class="section-card-icon"><Icon name="lucide:megaphone" width={22} height={22} /></div>
+        <span class="section-card-kicker">B · 5 pages</span>
+        <h3>Brand Expression</h3>
+        <p>The <em>how we sound</em>. Personality, voice in depth, tone by context, messaging framework, taglines.</p>
+      </article>
+
+      <article class="section-card">
+        <div class="section-card-icon"><Icon name="lucide:layers" width={22} height={22} /></div>
+        <span class="section-card-kicker">C · 6 pages</span>
+        <h3>Applied Identity</h3>
+        <p>The <em>where we show up</em>. Logo applications, social playbook, content strategy, photography, presentations, co-branding.</p>
+      </article>
+
+      <article class="section-card">
+        <div class="section-card-icon"><Icon name="lucide:shield-check" width={22} height={22} /></div>
+        <span class="section-card-kicker">D · 2 pages</span>
+        <h3>Protection & Ops</h3>
+        <p>The <em>how we protect it</em>. Trademark and legal usage, versioning, asset requests, and approval workflow.</p>
+      </article>
+    </div>
+  </Section>
+
+  <Section title="How to use these pages">
+    <ul class="howto-list">
+      <li><strong>Read Strategy first.</strong> If you skip straight to Voice or Social, the advice will feel disconnected from the brand's actual purpose.</li>
+      <li><strong>Apply from the top down.</strong> Strategy decides positioning; Expression decides how that positioning speaks; Applied decides where it lives. Don't reverse the order.</li>
+      <li><strong>Copy verbatim where we've written it.</strong> Mission, values, positioning statement, taglines — use the exact wording. Don't paraphrase into something that sounds <em>close</em>.</li>
+      <li><strong>Raise a flag before you diverge.</strong> If the brand needs to sound different for a specific audience (e.g. a government RFP), open a discussion — don't just rewrite.</li>
+    </ul>
+  </Section>
+
+  <Callout variant="note" title="Identity is a living contract">
+    <p>
+      The brand's identity evolves — every year, every campaign, every new
+      market. But changes are deliberate, not casual. When you see something
+      on this site that feels out of date or off-voice, flag it. Don't
+      improvise around it in your own work.
+    </p>
+  </Callout>
+
+  <Section title="Version & ownership">
+    <p>
+      <strong>Layer version:</strong> v0.2 · shipping in 4 waves through 2026.<br />
+      <strong>Shipped in Wave 1:</strong> Introduction, Brand Story, Mission/Vision/Values, Positioning, Target Audiences.<br />
+      <strong>Owner:</strong> MSI Shamim, Founder &amp; CEO.<br />
+      <strong>Contributions:</strong> open a discussion before opening a PR — changes to brand strategy or voice ripple into every surface.
+    </p>
+  </Section>
+</BaseLayout>
+
+<style>
+  .section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-9);
+    margin-top: var(--space-8);
+  }
+
+  .section-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14) var(--space-14);
+  }
+
+  .section-card-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    background: var(--gradient-lime);
+    color: var(--color-brand-ink-on-lime);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-icon-tile);
+    margin-bottom: var(--space-8);
+  }
+
+  .section-card-kicker {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+    margin-bottom: var(--space-3);
+  }
+
+  .section-card h3 {
+    font-size: 20px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-text-strong);
+    margin-bottom: var(--space-4);
+  }
+
+  .section-card p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+    max-width: none;
+  }
+
+  .section-card em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+
+  .howto-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+    max-width: 72ch;
+  }
+
+  .howto-list li {
+    position: relative;
+    padding-left: 22px;
+    margin-top: var(--space-6);
+    line-height: 1.6;
+    color: var(--color-text-body);
+  }
+
+  .howto-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: var(--color-brand-lime);
+    border-radius: 2px;
+    box-shadow: var(--shadow-icon-tile);
+  }
+
+  @media (max-width: 760px) {
+    .section-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

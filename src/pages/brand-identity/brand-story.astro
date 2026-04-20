@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Callout from '../../components/Callout.astro';
+---
+
+<BaseLayout
+  title="Brand Identity · Brand Story"
+  description="The 10-year origin story of Increments Inc. — why it exists, what it replaces, and how it became what it is today."
+>
+  <PageHeader
+    eyebrow="Brand Identity · 02"
+    title="Brand Story"
+    italicWord="Story"
+    lede="Every brand worth building is a reaction to something broken. Increments is ten years of reacting to one thing: founders who needed real software, fast — and couldn't find anyone they trusted to build it."
+  />
+
+  <Section title="The origin" kicker="2016 — Before Increments had a name">
+    <p>
+      In 2016, MSI Shamim kept watching the same scene play out. A founder
+      would describe what they needed — a working product, in weeks, not
+      quarters. And an agency would quote six figures and twelve months.
+      Offshore shops would quote one-tenth the price and deliver something
+      that looked right in screenshots but fell apart in production.
+    </p>
+    <p>
+      The middle didn't exist. A founder couldn't hire premium engineering
+      without waiting a year to ramp a team. They couldn't trust a cheap
+      shop to own the work. And they couldn't afford to be a line item on
+      an agency's roster of 200 clients.
+    </p>
+    <p>
+      Increments started as the answer to <em>"what would it look like if
+      senior engineering moved at startup speed, and treated every client
+      like the only one?"</em>
+    </p>
+  </Section>
+
+  <Section title="The name" kicker="Build in real, shippable increments">
+    <Callout variant="note">
+      <p>
+        The name isn't a flourish. It's the philosophy.
+      </p>
+      <p>
+        <strong>Increments</strong> means we ship small, real, working things —
+        a 7-day prototype, a 2-week milestone, a 30-day integration. Not
+        12-month waterfall plans with a single ship date at the end. Not PDF
+        roadmaps that no one reads. Incremental, observable, shippable progress —
+        every week, every sprint.
+      </p>
+    </Callout>
+  </Section>
+
+  <Section title="The first decade" kicker="What a decade of doing this taught us">
+    <div class="arc">
+      <article class="arc-year">
+        <span class="arc-label">2016–2018 · Prove it</span>
+        <p>
+          The first two years were spent proving that premium engineering,
+          delivered founder-direct, could be faster than any agency and more
+          trustworthy than any offshore shop. Every client was a referral.
+          Every engagement was a bet on the model.
+        </p>
+      </article>
+
+      <article class="arc-year">
+        <span class="arc-label">2019–2021 · Systematize it</span>
+        <p>
+          The 7-day prototype became a default. The <em>free audit, then
+          decide</em> offer became a default. The <em>24-month locked pricing</em>
+          became a default. What was once a set of handshakes became a
+          repeatable system — and the first non-referral clients started
+          arriving.
+        </p>
+      </article>
+
+      <article class="arc-year">
+        <span class="arc-label">2022–2024 · Scale it</span>
+        <p>
+          Partnerships with <strong>Freeletics</strong>, <strong>Abwaab</strong>,
+          and a growing list of operator-founders who came back for second
+          and third engagements. The team grew. The system held. The brand
+          started to feel like a category, not a service.
+        </p>
+      </article>
+
+      <article class="arc-year arc-year--current">
+        <span class="arc-label">2026 · Ten years in · Anniversary edition</span>
+        <p>
+          This year we formalize what the first decade produced: a design
+          system, a partner program with six tiers, a Founding 25 program
+          for the next generation of clients — and a brand that reflects
+          the discipline we've always operated with, even when the collateral
+          didn't quite match.
+        </p>
+      </article>
+    </div>
+  </Section>
+
+  <Section title="Why it matters" kicker="The story isn't decoration">
+    <p>
+      The brand story isn't a marketing asset. It's the reason every
+      decision downstream — how we price, who we hire, what we refuse to
+      take on, what we say no to — makes sense.
+    </p>
+    <p>
+      Whenever a team member or partner asks <em>"should we do this?"</em>
+      — whether it's a discount, a platform, a hire, a new service line —
+      the story is where the answer comes from. If the decision moves
+      Increments closer to an agency or closer to an offshore shop, it's
+      probably wrong. If it moves us closer to <em>senior engineering,
+      founder-direct, real increments, locked pricing</em>, it's probably
+      right.
+    </p>
+  </Section>
+</BaseLayout>
+
+<style>
+  .arc {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+    margin-top: var(--space-8);
+  }
+
+  .arc-year {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14) var(--space-14);
+  }
+
+  .arc-year--current {
+    border-left: 3px solid var(--color-brand-lime);
+  }
+
+  .arc-label {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+    margin-bottom: var(--space-6);
+  }
+
+  .arc-year p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--color-text-body);
+    max-width: none;
+  }
+
+  .arc-year strong {
+    color: var(--color-text-strong);
+    font-weight: var(--type-weight-heavy);
+  }
+
+  .arc-year em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+</style>

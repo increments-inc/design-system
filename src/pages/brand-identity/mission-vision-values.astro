@@ -1,0 +1,220 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Callout from '../../components/Callout.astro';
+import MessageBlock from '../../components/MessageBlock.astro';
+
+/**
+ * The six core values. Each is a noun (the quality) + a one-line behavioral
+ * definition (what it looks like in practice) — so "show, don't tell" on
+ * every value.
+ */
+const coreValues = [
+  {
+    icon: 'zap',
+    name: 'Ship real things',
+    definition: "Working software beats polished roadmaps. If it doesn't run, it doesn't count. Every increment is observable and usable.",
+  },
+  {
+    icon: 'handshake',
+    name: 'Founder-direct',
+    definition: 'No account managers. No layers. The person building your software is the person you talk to about your software.',
+  },
+  {
+    icon: 'lock',
+    name: 'Locked pricing, earned trust',
+    definition: 'Prices we quote are prices you pay — 24 months at a stretch. Predictability is a feature, not a concession.',
+  },
+  {
+    icon: 'target',
+    name: 'Premium over cheap',
+    definition: 'We will turn down work that prices us as a commodity. Reputation compounds; discounts don\'t.',
+  },
+  {
+    icon: 'wind',
+    name: 'Breathing room beats density',
+    definition: 'In design, in scope, in pricing, in calendars — we leave room. Cramming signals desperation; space signals discipline.',
+  },
+  {
+    icon: 'compass',
+    name: 'Say the hard thing',
+    definition: "If the client's plan won't work, we say so — before the contract, not after. Expensive honesty beats cheap agreement.",
+  },
+];
+---
+
+<BaseLayout
+  title="Brand Identity · Mission · Vision · Values"
+  description="The three north stars — mission, vision, and six core values — that every Increments decision gets checked against."
+>
+  <PageHeader
+    eyebrow="Brand Identity · 03"
+    title="Mission, Vision & Values"
+    italicWord="Values"
+    lede="Three statements we check every major decision against. Mission says what we do every day. Vision says what we're building toward. Values say how we refuse to compromise getting there."
+  />
+
+  <Section title="Mission" kicker="What we do — every day">
+    <MessageBlock label="Mission statement" variant="lime">
+      <p>
+        We build <em>premium</em> custom software for operator-founders who need
+        to move fast without trading quality — delivered in real, shippable
+        increments, founder-direct, at locked pricing.
+      </p>
+    </MessageBlock>
+
+    <p>
+      The mission is <strong>operational</strong> — it describes what we do on a
+      Tuesday morning. It includes the qualifiers that matter: <em>premium</em>
+      (not cheap), <em>operator-founders</em> (not enterprise procurement),
+      <em>shippable increments</em> (not roadmap theater), <em>founder-direct</em>
+      (not agency-style), and <em>locked pricing</em> (not time-and-materials).
+    </p>
+    <p>
+      If a project can't be described using those five qualifiers, it probably
+      isn't an Increments project.
+    </p>
+  </Section>
+
+  <Section title="Vision" kicker="What we're building toward">
+    <MessageBlock label="Vision statement">
+      <p>
+        A world where every operator-founder has a <em>world-class</em> engineering
+        team they actually trust — and the relationship feels peer-to-peer, not
+        vendor-to-client.
+      </p>
+    </MessageBlock>
+
+    <p>
+      The vision is <strong>aspirational</strong> — it describes the state of
+      the world we're working toward. "Peer-to-peer" is the key phrase: we're
+      not trying to become the biggest agency or the cheapest dev shop. We're
+      trying to redefine the relationship between a founder and the people who
+      build their software.
+    </p>
+    <p>
+      Every founder deserves to work with engineers who tell them the truth,
+      ship real things, and feel like a partner — not a procurement line item.
+    </p>
+  </Section>
+
+  <Section title="Core values" kicker="Six non-negotiables">
+    <p>
+      Values aren't aspirations. They're the rules we actually follow when the
+      decision is hard — when there's money on the table for bending one.
+      These six passed ten years of stress-testing.
+    </p>
+
+    <div class="values-grid">
+      {coreValues.map((value) => (
+        <article class="value-card">
+          <div class="value-icon">
+            <Icon name={`lucide:${value.icon}`} width={22} height={22} />
+          </div>
+          <h3 class="value-name">{value.name}</h3>
+          <p class="value-definition">{value.definition}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section title="How to use these" kicker="When the answer isn't obvious">
+    <Callout variant="note" title="The decision test">
+      <p>
+        When facing a hard decision — a discount request, a new hire, a scope
+        expansion, a partner ask — run it through the values:
+      </p>
+      <ol class="decision-list">
+        <li>Does it move us toward <em>shipping real things</em> — or toward delivering promises?</li>
+        <li>Does it preserve the <em>founder-direct</em> relationship — or add a layer?</li>
+        <li>Does it hold <em>locked pricing</em> — or introduce ambiguity?</li>
+        <li>Does it keep us <em>premium</em> — or price us as a commodity?</li>
+        <li>Does it give us <em>breathing room</em> — or cram us?</li>
+        <li>Does it require us to <em>say the hard thing</em> — or let us off easy?</li>
+      </ol>
+      <p>
+        Three or more "no" answers and the decision is almost certainly wrong for Increments — no matter how good the short-term numbers look.
+      </p>
+    </Callout>
+  </Section>
+</BaseLayout>
+
+<style>
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-9);
+    margin-top: var(--space-8);
+  }
+
+  .value-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14) var(--space-14);
+  }
+
+  .value-icon {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    background: var(--gradient-lime);
+    color: var(--color-brand-ink-on-lime);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-icon-tile);
+    margin-bottom: var(--space-7);
+  }
+
+  .value-name {
+    font-size: 20px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-text-strong);
+    margin-bottom: var(--space-4);
+  }
+
+  .value-definition {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--color-text-body);
+    max-width: none;
+  }
+
+  .decision-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+    counter-reset: decision;
+  }
+
+  .decision-list li {
+    counter-increment: decision;
+    position: relative;
+    padding-left: 44px;
+    margin-top: var(--space-5);
+    line-height: 1.55;
+    font-size: 14px;
+  }
+
+  .decision-list li::before {
+    content: counter(decision, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    font-size: 20px;
+    color: var(--color-brand-lime);
+  }
+
+  @media (max-width: 760px) {
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

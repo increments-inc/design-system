@@ -1,0 +1,192 @@
+---
+import { Icon } from 'astro-icon/components';
+
+/**
+ * PersonaCard — profile of a target audience segment.
+ * Used on the Target Audiences page. Shows an icon chip, name, JTBD quote,
+ * and two-column "what they need / what they don't want" lists.
+ */
+
+type Props = {
+  icon: string;                // Lucide icon name (without "lucide:" prefix)
+  name: string;                // Audience name, e.g. "The Operator Founder"
+  kicker?: string;             // Short label above name, e.g. "Primary"
+  jtbd: string;                // Job-to-be-done quote, first person
+  needs: string[];             // What this persona needs from Increments
+  avoids: string[];            // What this persona pushes back on
+};
+
+const { icon, name, kicker, jtbd, needs, avoids } = Astro.props;
+---
+
+<article class="persona-card">
+  <header class="persona-head">
+    <div class="persona-icon">
+      <Icon name={`lucide:${icon}`} width={22} height={22} />
+    </div>
+    <div class="persona-title">
+      {kicker && <span class="persona-kicker">{kicker}</span>}
+      <h3 class="persona-name">{name}</h3>
+    </div>
+  </header>
+
+  <blockquote class="persona-jtbd">
+    <em>&ldquo;{jtbd}&rdquo;</em>
+  </blockquote>
+
+  <div class="persona-grid">
+    <section class="persona-col persona-col--needs">
+      <span class="persona-col-label">What they need</span>
+      <ul>
+        {needs.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+    <section class="persona-col persona-col--avoids">
+      <span class="persona-col-label">What they push back on</span>
+      <ul>
+        {avoids.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+  </div>
+</article>
+
+<style>
+  .persona-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14) var(--space-14);
+  }
+
+  .persona-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-7);
+    margin-bottom: var(--space-10);
+  }
+
+  .persona-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    background: var(--gradient-lime);
+    color: var(--color-brand-ink-on-lime);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-icon-tile);
+    flex-shrink: 0;
+  }
+
+  .persona-title {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .persona-kicker {
+    font-size: 10px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+  }
+
+  .persona-name {
+    font-size: 20px;
+    font-weight: var(--type-weight-heavy);
+    color: var(--color-text-strong);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .persona-jtbd {
+    position: relative;
+    padding: var(--space-8) var(--space-10);
+    margin-bottom: var(--space-10);
+    background: var(--color-surface-card-deep);
+    border-left: 3px solid var(--color-brand-lime);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
+  .persona-jtbd em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    font-size: 16px;
+    line-height: 1.4;
+    color: var(--color-text-strong);
+  }
+
+  .persona-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-10);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border-soft);
+  }
+
+  .persona-col-label {
+    display: block;
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-5);
+  }
+
+  .persona-col--needs .persona-col-label {
+    color: var(--color-brand-lime);
+  }
+
+  .persona-col--avoids .persona-col-label {
+    color: var(--color-state-danger);
+  }
+
+  .persona-col ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .persona-col li {
+    position: relative;
+    padding-left: 20px;
+    margin-top: var(--space-4);
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  .persona-col li:first-child {
+    margin-top: 0;
+  }
+
+  .persona-col--needs li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    background: var(--color-brand-lime);
+    border-radius: 2px;
+    box-shadow: var(--shadow-icon-tile);
+  }
+
+  .persona-col--avoids li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid var(--color-state-danger);
+    border-radius: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .persona-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-9);
+    }
+  }
+</style>

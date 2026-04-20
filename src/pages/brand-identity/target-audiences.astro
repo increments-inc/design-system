@@ -1,0 +1,184 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import PersonaCard from '../../components/PersonaCard.astro';
+import Callout from '../../components/Callout.astro';
+---
+
+<BaseLayout
+  title="Brand Identity · Target Audiences"
+  description="Three personas that every Increments message is written for — the operator-founder, the channel partner, and the enterprise buyer."
+>
+  <PageHeader
+    eyebrow="Brand Identity · 05"
+    title="Target Audiences"
+    italicWord="Audiences"
+    lede="Every message Increments writes is written for one of three people. Know which one before you write — the words that land with a founder sound wrong to an enterprise buyer, and vice versa."
+  />
+
+  <Section title="The three personas" kicker="Primary, secondary, tertiary">
+    <p>
+      Personas aren't invented; they're distilled from ten years of actual
+      clients and partners. The Founding 25 program is built for the primary.
+      The Partner Program is built for the secondary. Enterprise accounts are
+      the tertiary. Each audience gets different messaging, different proof
+      points, and a different tone — but the same underlying voice.
+    </p>
+  </Section>
+
+  <PersonaCard
+    kicker="Primary · Founding 25 target"
+    name="The Operator Founder"
+    icon="rocket"
+    jtbd="I need working software, fast, and I need to trust the people building it."
+    needs={[
+      'A working prototype in weeks, not quarters — something they can actually show investors or users.',
+      'Senior engineering ownership — someone who takes the whole problem, not just the ticket.',
+      'Predictable pricing — budget they can plan 12–24 months around without surprises.',
+      'Direct access — the person building is the person they talk to.',
+      'Honesty about what will and won\'t work — even if it loses the deal short-term.',
+    ]}
+    avoids={[
+      'Agency-style pitches with account managers, gold-silver-bronze tiers, and change-order theater.',
+      'Offshore-style "senior engineers" who turn out to be juniors supervised by juniors.',
+      'Time-and-materials contracts with no ceiling and no accountability.',
+      'Yes-men who agree to everything and deliver against none of it.',
+      'PowerPoint roadmaps that never produce working software.',
+    ]}
+  />
+
+  <PersonaCard
+    kicker="Secondary · Partner Program target"
+    name="The Channel Partner"
+    icon="handshake"
+    jtbd="I know people who need software — I want to get paid for the introduction without burning my reputation."
+    needs={[
+      'A clean, professional partner they can introduce to their network with zero regret.',
+      'Clear commission structure — no ambiguity about what gets paid, when, and for how long.',
+      'Co-branded materials they can share (flyer, playbook, proposal template).',
+      'A fast response from the team — leads cool quickly if nothing happens for days.',
+      'Real case studies from recognizable clients that justify the introduction.',
+    ]}
+    avoids={[
+      'Being treated as a lead-gen channel rather than a partner.',
+      'Complicated pricing or tiers they can\'t explain to their contact in one sentence.',
+      'Delivery risk — if Increments under-delivers, their relationship with the client is damaged.',
+      'Having to "sell" a service they don\'t understand.',
+      'Commission clawbacks or mystery deductions.',
+    ]}
+  />
+
+  <PersonaCard
+    kicker="Tertiary · Enterprise accounts"
+    name="The Enterprise Buyer"
+    icon="building-2"
+    jtbd="I need senior engineering firepower for a specific project, without adding permanent headcount."
+    needs={[
+      'A clean statement of work with defined deliverables, milestones, and acceptance criteria.',
+      'Proven delivery at similar company size — Freeletics and Abwaab-scale references.',
+      'Security, legal, and IP clarity upfront — NDAs, MSAs, code ownership.',
+      'Project leadership that can speak to their VPs and engineers equally well.',
+      'Clean handover at the end — documented, testable, maintainable.',
+    ]}
+    avoids={[
+      'Startup-casual communication — they need executive-appropriate formality.',
+      'Surprise change-orders or billing — procurement needs predictability.',
+      'Ambiguity about who owns the code and IP.',
+      'Being treated like a startup — they\'re not buying "speed over quality."',
+      'Free-audit or promo offers that feel like discount plays — they signal lack of confidence.',
+    ]}
+  />
+
+  <Section title="Anti-personas" kicker="Who we don't write for">
+    <Callout variant="warning" title="If these describe your reader, stop writing.">
+      <ul class="anti-list">
+        <li><strong>The hourly-rate shopper.</strong> First question is "what's your rate?" — not a fit.</li>
+        <li><strong>The idea-only founder.</strong> Wants us to build their idea for equity with no revenue traction.</li>
+        <li><strong>The staffing buyer.</strong> Wants bodies, not ownership. Procurement treats us as commodity labor.</li>
+        <li><strong>The template-SaaS buyer.</strong> Wants a configured white-label, not custom engineering.</li>
+        <li><strong>The Fortune-500 procurement lead.</strong> Ten-step RFP process, matrix pricing. Not our market.</li>
+      </ul>
+    </Callout>
+  </Section>
+
+  <Section title="How to use personas" kicker="Before you write, ask">
+    <ol class="use-list">
+      <li>
+        <strong>Which persona am I writing for?</strong> If it could be any of
+        the three, the message is probably too generic — separate it into
+        audience-specific versions.
+      </li>
+      <li>
+        <strong>What are they hiring us to do?</strong> Use the JTBD quote as
+        the lens — does this message speak to that job?
+      </li>
+      <li>
+        <strong>What do they push back on?</strong> Check your copy against
+        the "push back on" list — if you're accidentally doing one of those
+        things, rewrite.
+      </li>
+      <li>
+        <strong>Am I using the right proof points?</strong> Founders want
+        speed + trust. Partners want professionalism + clarity. Enterprise
+        wants formality + references. Don't mix.
+      </li>
+    </ol>
+  </Section>
+</BaseLayout>
+
+<style>
+  .anti-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-4);
+  }
+
+  .anti-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-top: var(--space-4);
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--color-text-body);
+  }
+
+  .anti-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid var(--color-state-danger);
+    border-radius: 2px;
+  }
+
+  .use-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+    counter-reset: step;
+    max-width: 72ch;
+  }
+
+  .use-list li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 44px;
+    margin-top: var(--space-7);
+    line-height: 1.6;
+  }
+
+  .use-list li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: -2px;
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    font-size: 22px;
+    color: var(--color-brand-lime);
+  }
+</style>

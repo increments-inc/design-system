@@ -2,10 +2,18 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 /**
- * Landing page — hero + foundation index cards.
+ * Landing page — hero + Brand Foundations + Brand Identity index cards.
  */
 
-const foundationCards = [
+type LandingCard = {
+  number: string;
+  title: string;
+  href: string;
+  summary: string;
+  status?: 'ready' | 'soon';
+};
+
+const foundationCards: LandingCard[] = [
   {
     number: '01',
     title: 'Introduction',
@@ -79,6 +87,135 @@ const foundationCards = [
     summary: 'CSS custom properties and Figma variable names — single source of truth.',
   },
 ];
+
+const identityCards: LandingCard[] = [
+  {
+    number: '01',
+    title: 'Introduction',
+    href: '/brand-identity/introduction/',
+    summary: 'What the Brand Identity layer is and how to use its 18 pages.',
+    status: 'ready',
+  },
+  {
+    number: '02',
+    title: 'Brand Story',
+    href: '/brand-identity/brand-story/',
+    summary: 'The 10-year origin — why Increments exists and what it was built to replace.',
+    status: 'ready',
+  },
+  {
+    number: '03',
+    title: 'Mission · Vision · Values',
+    href: '/brand-identity/mission-vision-values/',
+    summary: 'Three north stars and six non-negotiable values we check every hard decision against.',
+    status: 'ready',
+  },
+  {
+    number: '04',
+    title: 'Positioning',
+    href: '/brand-identity/positioning/',
+    summary: 'Who we are, who we serve, what we replace, what makes us different — in one formal statement.',
+    status: 'ready',
+  },
+  {
+    number: '05',
+    title: 'Target Audiences',
+    href: '/brand-identity/target-audiences/',
+    summary: 'Three personas with JTBD quotes: the operator-founder, the channel partner, the enterprise buyer.',
+    status: 'ready',
+  },
+  {
+    number: '06',
+    title: 'Brand Personality',
+    href: '/brand-identity/brand-personality/',
+    summary: 'Archetype, attributes, and the deep expansion of how Increments feels.',
+    status: 'soon',
+  },
+  {
+    number: '07',
+    title: 'Voice in Depth',
+    href: '/brand-identity/voice-in-depth/',
+    summary: 'Vocabulary, cadence, sentence shapes, before/after rewrites.',
+    status: 'soon',
+  },
+  {
+    number: '08',
+    title: 'Tone by Context',
+    href: '/brand-identity/tone-by-context/',
+    summary: 'Sales · support · partner · social · crisis — how tone shifts without breaking voice.',
+    status: 'soon',
+  },
+  {
+    number: '09',
+    title: 'Messaging Framework',
+    href: '/brand-identity/messaging-framework/',
+    summary: 'Key messages by audience, proof points, boilerplates.',
+    status: 'soon',
+  },
+  {
+    number: '10',
+    title: 'Taglines & Copy Blocks',
+    href: '/brand-identity/taglines/',
+    summary: 'Elevator pitches at 30s / 60s / 2min, official taglines, ready-to-paste blocks.',
+    status: 'soon',
+  },
+  {
+    number: '11',
+    title: 'Logo Applications',
+    href: '/brand-identity/logo-applications/',
+    summary: 'Profile vs cover, favicon, app icon, platform-specific sizes.',
+    status: 'soon',
+  },
+  {
+    number: '12',
+    title: 'Social Media Playbook',
+    href: '/brand-identity/social-media/',
+    summary: 'LinkedIn, Instagram, X, YouTube — one consolidated playbook.',
+    status: 'soon',
+  },
+  {
+    number: '13',
+    title: 'Content Strategy',
+    href: '/brand-identity/content-strategy/',
+    summary: 'Pillars, mix ratios, cadence, engagement rules.',
+    status: 'soon',
+  },
+  {
+    number: '14',
+    title: 'Photography',
+    href: '/brand-identity/photography/',
+    summary: 'Why Increments stays photoless — and what we use instead.',
+    status: 'soon',
+  },
+  {
+    number: '15',
+    title: 'Presentations & Docs',
+    href: '/brand-identity/presentations/',
+    summary: 'Deck templates, proposal style, email signatures, PDF layout.',
+    status: 'soon',
+  },
+  {
+    number: '16',
+    title: 'Partner & Co-Branding',
+    href: '/brand-identity/co-branding/',
+    summary: 'Rules for partners using the mark; lockup patterns.',
+    status: 'soon',
+  },
+  {
+    number: '17',
+    title: 'Trademark & Legal',
+    href: '/brand-identity/trademark-legal/',
+    summary: 'Third-party citation, attribution, what\'s protected.',
+    status: 'soon',
+  },
+  {
+    number: '18',
+    title: 'Versioning & Requests',
+    href: '/brand-identity/versioning/',
+    summary: 'Who owns brand, approval workflow, changelog, version history.',
+    status: 'soon',
+  },
+];
 ---
 
 <BaseLayout
@@ -86,7 +223,7 @@ const foundationCards = [
   description="Increments Inc. Enterprise Design System — brand foundations, components, patterns, and tokens."
 >
   <section class="hero">
-    <span class="hero-kicker">10-Year Anniversary · v0.1</span>
+    <span class="hero-kicker">10-Year Anniversary · v0.2</span>
     <h1 class="hero-title">
       The <em>Increments</em> Design System.
     </h1>
@@ -101,16 +238,16 @@ const foundationCards = [
         <span class="hero-meta-label">Brand<br />Foundations</span>
       </div>
       <div class="hero-meta-item">
+        <span class="hero-meta-value">18</span>
+        <span class="hero-meta-label">Brand<br />Identity</span>
+      </div>
+      <div class="hero-meta-item">
         <span class="hero-meta-value">30+</span>
         <span class="hero-meta-label">Components<br />(coming)</span>
       </div>
       <div class="hero-meta-item">
         <span class="hero-meta-value">15</span>
         <span class="hero-meta-label">Patterns<br />(coming)</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="hero-meta-value">1</span>
-        <span class="hero-meta-label">Source<br />of truth</span>
       </div>
     </div>
   </section>
@@ -134,6 +271,38 @@ const foundationCards = [
           <span class="foundation-card-arrow" aria-hidden="true">→</span>
         </a>
       ))}
+    </div>
+  </section>
+
+  <section class="foundations">
+    <div class="foundations-head">
+      <span class="eyebrow">Part II · Wave 1 shipped · 13 more coming</span>
+      <h2 class="foundations-title">Brand <em>Identity</em></h2>
+      <p class="foundations-lede">
+        Above the visual system: who we are, how we speak, and where we show up.
+        Strategy, expression, applied identity, and protection — eighteen pages
+        shipping in four waves through 2026.
+      </p>
+    </div>
+
+    <div class="foundations-grid">
+      {identityCards.map((card) => {
+        const isSoon = card.status === 'soon';
+        return (
+          <a
+            href={isSoon ? '#' : card.href}
+            class={`foundation-card ${isSoon ? 'is-soon' : ''}`}
+            aria-disabled={isSoon ? 'true' : undefined}
+          >
+            <span class="foundation-card-number">{card.number}</span>
+            <h3 class="foundation-card-title">{card.title}</h3>
+            <p class="foundation-card-summary">{card.summary}</p>
+            <span class="foundation-card-arrow" aria-hidden="true">
+              {isSoon ? 'soon' : '→'}
+            </span>
+          </a>
+        );
+      })}
     </div>
   </section>
 </BaseLayout>
@@ -268,6 +437,25 @@ const foundationCards = [
     border-color: var(--color-border-lime);
     transform: translateY(-2px);
     background: var(--color-surface-card-deep);
+  }
+
+  .foundation-card.is-soon {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .foundation-card.is-soon .foundation-card-arrow {
+    font-family: var(--font-display);
+    font-size: 9.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-mute);
+    border: 1px solid var(--color-border-soft);
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    align-self: flex-start;
   }
 
   .foundation-card-number {

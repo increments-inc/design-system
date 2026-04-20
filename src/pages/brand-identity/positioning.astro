@@ -1,0 +1,331 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Section from '../../components/Section.astro';
+import Callout from '../../components/Callout.astro';
+import MessageBlock from '../../components/MessageBlock.astro';
+---
+
+<BaseLayout
+  title="Brand Identity · Positioning"
+  description="Who Increments is, who it serves, what it replaces, and what makes it different — in one formal statement."
+>
+  <PageHeader
+    eyebrow="Brand Identity · 04"
+    title="Positioning Statement"
+    italicWord="Positioning"
+    lede="Positioning is the single sentence that says who we are, who we serve, what we replace, and what makes us different. If it's wrong, everything downstream — messaging, hiring, pricing — goes slightly off."
+  />
+
+  <Section title="The statement" kicker="Memorize this one">
+    <MessageBlock label="Formal positioning statement" variant="lime">
+      <p>
+        <strong>For operator-founders and small-to-mid enterprise buyers</strong> who
+        need custom software built with real speed and real quality —
+        <strong>Increments is a premium engineering studio</strong> that replaces
+        traditional agencies, offshore dev shops, and full-team hiring — by
+        shipping working software in <em>7-day prototypes</em>, staying
+        <em>founder-direct</em>, and <em>locking pricing for 24 months</em> so
+        founders can plan without surprises.
+      </p>
+    </MessageBlock>
+
+    <p>
+      That's one sentence with five components. Each is deliberately chosen —
+      each is what makes Increments not-an-agency and not-an-offshore-shop.
+      The sections below unpack each component.
+    </p>
+  </Section>
+
+  <Section title="Who we are" kicker="Component 01 · Category">
+    <div class="positioning-row">
+      <div class="positioning-claim">
+        <span class="positioning-label">We are</span>
+        <p>A <em>premium engineering studio</em>.</p>
+      </div>
+      <div class="positioning-detail">
+        <p>
+          Not an agency (which implies account managers, client rosters, and
+          margins on top of labor). Not an offshore dev shop (which implies
+          cheap rates and no ownership). Not a staffing firm (which places
+          bodies and walks away).
+        </p>
+        <p>
+          <strong>Studio</strong> signals craft. <strong>Engineering</strong>
+          signals depth. <strong>Premium</strong> signals we know what we're
+          worth and won't compete on price.
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section title="Who we serve" kicker="Component 02 · Audience">
+    <div class="positioning-row">
+      <div class="positioning-claim">
+        <span class="positioning-label">We serve</span>
+        <p><em>Operator-founders</em> and <em>small-to-mid enterprise</em> buyers.</p>
+      </div>
+      <div class="positioning-detail">
+        <p>
+          Operator-founders are running something — a product, a business,
+          a team. They have taste, speed, and a pain. They need engineering
+          firepower without the ramp time of hiring.
+        </p>
+        <p>
+          Small-to-mid enterprise buyers (Head of Product, VP Engineering at
+          companies between 50–500 employees) need external engineering for
+          defined projects without adding to permanent headcount.
+        </p>
+        <p>
+          We don't serve: pure procurement buyers at Fortune 500s, agencies
+          looking to white-label cheap labor, or any client whose first
+          question is <em>"what's your hourly rate?"</em>
+        </p>
+      </div>
+    </div>
+  </Section>
+
+  <Section title="What we replace" kicker="Component 03 · Competition">
+    <div class="replacement-grid">
+      <article class="replacement-card">
+        <span class="replacement-kicker">Replaces</span>
+        <h4>Traditional agencies</h4>
+        <p>$100K–$500K. 6–12 month timelines. Account managers in the middle. Endless change-orders.</p>
+        <span class="replacement-vs">vs.</span>
+        <p class="replacement-us">We ship a prototype in 7 days. No account managers. Locked scope, locked price.</p>
+      </article>
+
+      <article class="replacement-card">
+        <span class="replacement-kicker">Replaces</span>
+        <h4>Offshore dev shops</h4>
+        <p>Cheap rates. No ownership. Screenshots that break in production. Time-zone roulette.</p>
+        <span class="replacement-vs">vs.</span>
+        <p class="replacement-us">Senior engineering. We own the work end-to-end. Your prototype runs in production.</p>
+      </article>
+
+      <article class="replacement-card">
+        <span class="replacement-kicker">Replaces</span>
+        <h4>Full-team hiring</h4>
+        <p>6–18 month ramp. Benefits, management overhead. Wrong-hire risk. Permanent headcount.</p>
+        <span class="replacement-vs">vs.</span>
+        <p class="replacement-us">Senior team plugged in on day one. Pay for the project, not the payroll.</p>
+      </article>
+    </div>
+  </Section>
+
+  <Section title="What makes us different" kicker="Component 04 · Proof points">
+    <ul class="proof-list">
+      <li>
+        <strong>7-day prototype.</strong> Working software in your hands before
+        any contract is signed. If it doesn't convince you, there's no deal.
+      </li>
+      <li>
+        <strong>Founder-direct.</strong> You talk to the person building your
+        software. No layers, no account managers, no "we'll circle back."
+      </li>
+      <li>
+        <strong>Locked pricing · 24 months.</strong> The price we quote is the
+        price you pay — protected against any future rate increase for 24
+        months.
+      </li>
+      <li>
+        <strong>Free audit, then decide.</strong> We review your existing
+        codebase or product at no cost. If there's no fit, we say so directly.
+      </li>
+      <li>
+        <strong>Real references, real work.</strong> Freeletics. Abwaab. Every
+        case study is a founder you can call.
+      </li>
+    </ul>
+  </Section>
+
+  <Section title="Anti-positioning" kicker="What we are NOT">
+    <Callout variant="warning" title="If it describes us, we're off-brand.">
+      <ul class="anti-list">
+        <li>We are <strong>not</strong> the cheapest option.</li>
+        <li>We are <strong>not</strong> a staffing or body-shop firm.</li>
+        <li>We are <strong>not</strong> a "your-idea-our-team" SaaS builder on a fixed template.</li>
+        <li>We are <strong>not</strong> a Fortune-500 enterprise consultancy with tiered pricing matrices.</li>
+        <li>We are <strong>not</strong> a co-founder / equity-for-work arrangement.</li>
+        <li>We are <strong>not</strong> a no-code, low-code, or AI-generated-code shop.</li>
+      </ul>
+    </Callout>
+  </Section>
+</BaseLayout>
+
+<style>
+  .positioning-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--space-12);
+    margin-top: var(--space-8);
+    align-items: start;
+  }
+
+  .positioning-claim {
+    background: var(--color-surface-card-deep);
+    border-left: 3px solid var(--color-brand-lime);
+    border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+    padding: var(--space-12) var(--space-14) var(--space-14);
+  }
+
+  .positioning-label {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+    margin-bottom: var(--space-5);
+  }
+
+  .positioning-claim p {
+    font-size: 22px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    color: var(--color-text-strong);
+    margin: 0;
+  }
+
+  .positioning-claim em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+
+  .positioning-detail p {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--color-text-body);
+  }
+
+  .positioning-detail p + p {
+    margin-top: var(--space-5);
+  }
+
+  .positioning-detail em {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+
+  .replacement-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-7);
+    margin-top: var(--space-8);
+  }
+
+  .replacement-card {
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-xl);
+    padding: var(--space-12) var(--space-14) var(--space-14);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .replacement-kicker {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-state-danger);
+    margin-bottom: var(--space-3);
+  }
+
+  .replacement-card h4 {
+    font-size: 17px;
+    font-weight: var(--type-weight-heavy);
+    letter-spacing: -0.015em;
+    color: var(--color-text-strong);
+    margin-bottom: var(--space-5);
+  }
+
+  .replacement-card p {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--color-text-mute);
+  }
+
+  .replacement-vs {
+    display: block;
+    margin: var(--space-6) 0 var(--space-4);
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--color-brand-lime);
+  }
+
+  .replacement-us {
+    color: var(--color-text-body) !important;
+    font-weight: var(--type-weight-medium);
+    font-size: 13.5px !important;
+  }
+
+  .proof-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-6);
+    max-width: 72ch;
+  }
+
+  .proof-list li {
+    position: relative;
+    padding-left: 24px;
+    margin-top: var(--space-6);
+    line-height: 1.6;
+    color: var(--color-text-body);
+  }
+
+  .proof-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 12px;
+    height: 12px;
+    background: var(--color-brand-lime);
+    border-radius: 2px;
+    box-shadow: var(--shadow-icon-tile);
+  }
+
+  .anti-list {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-4);
+  }
+
+  .anti-list li {
+    position: relative;
+    padding-left: 22px;
+    margin-top: var(--space-4);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-text-body);
+  }
+
+  .anti-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid var(--color-state-danger);
+    border-radius: 2px;
+  }
+
+  @media (max-width: 900px) {
+    .positioning-row {
+      grid-template-columns: 1fr;
+    }
+    .replacement-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

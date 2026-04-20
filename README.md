@@ -1,6 +1,6 @@
 # Increments Inc. — Design System
 
-[![Status](https://img.shields.io/badge/status-v0.1%20Brand%20Foundations-C0FE71?labelColor=09100C)](./)
+[![Status](https://img.shields.io/badge/status-v0.2%20Brand%20Identity%20Wave%201-C0FE71?labelColor=09100C)](./)
 [![Stack](https://img.shields.io/badge/stack-Astro%205%20%C2%B7%20MDX%20%C2%B7%20Lucide-09100C?labelColor=16312C)](./)
 
 > The single source of truth for every Increments Inc. surface — product screens, marketing flyers, sales decks, partner collateral, landing pages, and emails. Dark, premium, opinionated, and built to scale.
@@ -11,13 +11,14 @@
 
 ## What's inside
 
-The system ships in three layers:
+The system ships in four layers:
 
 | Layer | Status | Count |
 |---|---|---|
-| **Brand Foundations** | Shipped in v0.1 | 12 pages |
-| **Components** | Planned for v0.2 | ~30 |
-| **Patterns** | Planned for v0.3 | ~15 |
+| **Brand Foundations** | Shipped v0.1 | 12 pages |
+| **Brand Identity** | Wave 1 shipped (v0.2); 3 more waves in 2026 | 18 pages |
+| **Components** | Planned for v0.3 | ~30 |
+| **Patterns** | Planned for v0.4 | ~15 |
 
 ### Brand Foundations (v0.1)
 
@@ -33,6 +34,18 @@ The system ships in three layers:
 10. **Voice & Content** — copy ↔ design alignment, contact footer convention
 11. **Accessibility** — WCAG 2.1 AA contrast matrix, focus states, keyboard nav
 12. **Tokens** — CSS custom properties + Figma variable names
+
+### Brand Identity (v0.2 · Wave 1 shipped)
+
+**A · Brand Strategy — shipped**
+
+1. **Introduction** — map of the identity layer, how to use it
+2. **Brand Story** — the 10-year origin arc
+3. **Mission · Vision · Values** — three north stars + six non-negotiable values
+4. **Positioning Statement** — who we are, who we serve, what we replace
+5. **Target Audiences** — operator-founder, channel partner, enterprise buyer
+
+**B · Brand Expression — Wave 2** · **C · Applied Identity — Wave 3** · **D · Protection & Operations — Wave 4**
 
 ---
 
@@ -131,9 +144,14 @@ Open a discussion before opening a PR — breaking a foundation token ripples ev
 ## Roadmap
 
 - [x] **v0.1** — Brand Foundations (12 pages)
-- [ ] **v0.2** — Component library (buttons, inputs, tables, nav, feedback, data display)
-- [ ] **v0.3** — Patterns (forms, dashboards, auth, onboarding, error states)
-- [ ] **v0.4** — Figma library + Code Connect mappings
+- [ ] **v0.2** — Brand Identity (18 pages, 4 waves)
+  - [x] Wave 1 — Brand Strategy (5 pages)
+  - [ ] Wave 2 — Brand Expression (5 pages)
+  - [ ] Wave 3 — Applied Identity (6 pages)
+  - [ ] Wave 4 — Protection & Operations (2 pages)
+- [ ] **v0.3** — Component library (buttons, inputs, tables, nav, feedback, data display)
+- [ ] **v0.4** — Patterns (forms, dashboards, auth, onboarding, error states)
+- [ ] **v0.5** — Figma library + Code Connect mappings
 
 ---
 

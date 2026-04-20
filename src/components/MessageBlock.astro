@@ -1,0 +1,179 @@
+---
+import { Icon } from 'astro-icon/components';
+
+/**
+ * MessageBlock — a labeled, quote-styled copy block.
+ * Used on Messaging Framework and Taglines pages. The body is the canonical
+ * copy; the label explains the context (e.g. "Elevator pitch · 30 seconds").
+ * Clicking the block copies the body text to the clipboard.
+ */
+
+type Props = {
+  label: string;          // Short context label ("Elevator pitch · 30s")
+  variant?: 'default' | 'tagline' | 'lime';
+  attribution?: string;   // Optional byline, e.g. "— for partner recruiting"
+};
+
+const { label, variant = 'default', attribution } = Astro.props;
+---
+
+<figure class={`message-block message-block--${variant}`}>
+  <header class="message-head">
+    <span class="message-label">{label}</span>
+    <button
+      class="message-copy"
+      type="button"
+      data-copy-button
+      aria-label="Copy message text"
+    >
+      <Icon name="lucide:copy" width={14} height={14} />
+      <span class="message-copy-text">Copy</span>
+    </button>
+  </header>
+
+  <blockquote class="message-body" data-copy-source>
+    <slot />
+  </blockquote>
+
+  {attribution && <figcaption class="message-attribution">{attribution}</figcaption>}
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-button]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const block = button.closest('.message-block');
+      const source = block?.querySelector<HTMLElement>('[data-copy-source]');
+      if (!source) return;
+
+      const text = source.innerText.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        const textEl = button.querySelector<HTMLElement>('.message-copy-text');
+        if (textEl) {
+          const original = textEl.textContent;
+          textEl.textContent = 'Copied';
+          button.classList.add('is-copied');
+          setTimeout(() => {
+            textEl.textContent = original;
+            button.classList.remove('is-copied');
+          }, 1600);
+        }
+      } catch (error) {
+        console.error('Clipboard copy failed', error);
+      }
+    });
+  });
+</script>
+
+<style>
+  .message-block {
+    margin: var(--space-8) 0;
+    padding: var(--space-11) var(--space-14);
+    background: var(--color-surface-card);
+    border: 1px solid var(--color-border-soft);
+    border-left: 3px solid var(--color-brand-lime);
+    border-radius: 0 var(--radius-xl) var(--radius-xl) 0;
+  }
+
+  .message-block--tagline {
+    background: var(--color-surface-card-deep);
+    border-left-color: var(--color-brand-lime);
+  }
+
+  .message-block--lime {
+    background: var(--gradient-lime);
+    border: 0;
+    color: var(--color-brand-ink-on-lime);
+  }
+
+  .message-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-7);
+    margin-bottom: var(--space-6);
+  }
+
+  .message-label {
+    font-size: 10.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-brand-lime);
+  }
+
+  .message-block--lime .message-label {
+    color: var(--color-brand-forest);
+  }
+
+  .message-copy {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-body);
+    background: transparent;
+    border: 1px solid var(--color-border-soft);
+    border-radius: var(--radius-pill);
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all var(--motion-default) var(--motion-ease);
+  }
+
+  .message-copy:hover {
+    color: var(--color-brand-lime);
+    border-color: var(--color-border-lime);
+  }
+
+  .message-copy.is-copied {
+    color: var(--color-brand-ink-on-lime);
+    background: var(--color-brand-lime);
+    border-color: var(--color-brand-lime);
+  }
+
+  .message-block--lime .message-copy {
+    color: var(--color-brand-forest);
+    border-color: rgba(9, 16, 12, 0.2);
+  }
+
+  .message-block--lime .message-copy:hover {
+    background: rgba(9, 16, 12, 0.08);
+  }
+
+  .message-body {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: var(--type-weight-medium);
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--color-text-strong);
+  }
+
+  .message-block--lime .message-body {
+    color: var(--color-brand-forest);
+    font-weight: var(--type-weight-semi);
+  }
+
+  .message-body :global(em) {
+    font-family: var(--font-editorial);
+    font-style: italic;
+    font-weight: var(--type-weight-regular);
+    color: var(--color-brand-lime);
+  }
+
+  .message-block--lime .message-body :global(em) {
+    color: var(--color-brand-forest);
+  }
+
+  .message-attribution {
+    margin-top: var(--space-5);
+    font-size: 12.5px;
+    font-weight: var(--type-weight-bold);
+    letter-spacing: 0.04em;
+    color: var(--color-text-mute);
+  }
+</style>
